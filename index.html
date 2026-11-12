@@ -3,122 +3,86 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Slick Games – Daily BetPawa Tips (Uganda)</title>
+<title>Slick Games | Daily BetPawa Tips Uganda</title>
 <style>
-:root{--bg:#0b1a12;--card:#12281c;--line:#1f4030;--text:#eef5ef;--mute:#9db8a5;--gold:#f5c542;--green:#2ecc71;--red:#e5534b}
-*{box-sizing:border-box;margin:0;padding:0}
-body{font-family:Georgia,'Times New Roman',serif;background:var(--bg);color:var(--text);line-height:1.5;padding-bottom:40px}
-header{padding:28px 18px 18px;text-align:center;border-bottom:3px solid var(--gold)}
-h1{font-size:2rem;letter-spacing:.5px}
-h1 span{color:var(--gold)}
-.sub{color:var(--mute);margin-top:6px;font-size:.95rem}
-main{max-width:640px;margin:0 auto;padding:16px}
-.tabs{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin:6px 0 16px}
-.tab{background:var(--card);border:1px solid var(--line);color:var(--text);padding:12px 8px;border-radius:10px;font:inherit;cursor:pointer;text-align:center}
-.tab b{display:block;font-size:1.05rem}
-.tab small{color:var(--mute)}
-.tab.on{border-color:var(--gold);background:#1a3a28}
-.game{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:14px;margin-bottom:12px}
-.teams{font-size:1.1rem;font-weight:bold}
-.row{display:flex;justify-content:space-between;gap:10px;margin-top:6px;color:var(--mute);font-size:.95rem}
-.pick{color:var(--gold);font-weight:bold}
-.why{margin-top:8px;font-size:.92rem}
-.code{margin-top:8px;font-family:monospace;background:#0b1a12;padding:6px 10px;border-radius:8px;display:inline-block}
-.rules{display:flex;flex-wrap:wrap;gap:4px;margin-top:8px}
-.r{font-size:.75rem;padding:2px 7px;border-radius:6px;border:1px solid var(--line)}
-.r.y{background:#14432a;color:var(--green)}
-.r.n{background:#471b19;color:var(--red)}
-.empty{text-align:center;color:var(--mute);padding:28px 10px;border:1px dashed var(--line);border-radius:12px}
-h2{font-size:1.2rem;margin:26px 0 10px;color:var(--gold)}
-ol{padding-left:22px}
-ol li{margin-bottom:6px}
-.vip{background:linear-gradient(135deg,#1a3a28,#0f2519);border:1px solid var(--gold);border-radius:14px;padding:18px;text-align:center;margin-top:26px}
-.btn{display:inline-block;margin-top:12px;background:var(--gold);color:#1a1300;font-weight:bold;text-decoration:none;padding:12px 22px;border-radius:10px}
-footer{text-align:center;color:var(--mute);font-size:.8rem;padding:24px 16px 0}
+  :root{--bg:#0b1a12;--panel:#12261b;--panel2:#17301f;--line:#25442f;--text:#eef3ec;--muted:#93ad9a;--gold:#f2c230;--good:#5fd38a}
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--bg);color:var(--text);font-family:Georgia,"Times New Roman",serif;line-height:1.55}
+  header{padding:28px 20px 20px;text-align:center;border-bottom:3px solid var(--gold)}
+  h1{margin:0;font-size:2rem}
+  h1 span{color:var(--gold)}
+  header p{margin:8px auto 0;color:var(--muted);max-width:420px}
+  main{max-width:560px;margin:0 auto;padding:20px 16px 40px}
+  .tabs{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
+  .tab{background:var(--panel);border:1px solid var(--line);color:var(--text);border-radius:10px;padding:12px 6px;font:inherit;cursor:pointer;text-align:center}
+  .tab small{display:block;color:var(--muted);margin-top:2px}
+  .tab[aria-selected="true"]{background:var(--panel2);border-color:var(--gold)}
+  #box{margin-top:16px}
+  .game{background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:14px;margin-bottom:10px}
+  .lg{color:var(--muted);font-size:.85rem}
+  .teams{font-size:1.05rem;margin:4px 0 8px}
+  .row{display:flex;justify-content:space-between;gap:10px;align-items:baseline}
+  .pick{color:var(--gold)}
+  .odd{font-weight:bold;color:var(--good)}
+  .total{display:flex;justify-content:space-between;border-top:1px solid var(--line);padding-top:12px;margin-top:6px}
+  .empty{border:1px dashed var(--line);border-radius:10px;padding:22px 16px;text-align:center;color:var(--muted)}
+  h2{color:var(--gold);font-size:1.2rem;margin:32px 0 10px}
+  ol{padding-left:22px;margin:0}
+  li{margin-bottom:8px}
+  .vip{margin-top:28px;background:var(--panel);border:1px solid var(--gold);border-radius:12px;padding:20px;text-align:center}
+  .vip h2{margin-top:0}
+  .vip a{display:inline-block;background:var(--gold);color:#1a1400;text-decoration:none;font-weight:bold;padding:12px 24px;border-radius:8px;margin-top:8px}
+  footer{text-align:center;color:var(--muted);font-size:.85rem;padding:0 16px 30px}
 </style>
 </head>
 <body>
 <header>
   <h1>Slick <span>Games</span></h1>
-  <p class="sub">Daily BetPawa tips for Uganda. New picks every day at 11:00 AM.</p>
+  <p>Daily BetPawa tips for Uganda. New picks every day at 11:00 AM.</p>
 </header>
 <main>
-  <div class="tabs" id="tabs"></div>
-  <div id="list"></div>
-
-  <h2>Our 8-rule check</h2>
+  <div class="tabs" role="tablist" id="tabs"></div>
+  <div id="box" aria-live="polite"></div>
+  <h2>Our 7-rule check</h2>
   <ol>
-    <li>Team form over the last 5 matches</li>
-    <li>Head-to-head record</li>
-    <li>Home and away record</li>
-    <li>Injuries and suspensions</li>
-    <li>Goals scored and conceded</li>
-    <li>League position and motivation</li>
-    <li>Odds value on BetPawa</li>
-    <li>Match importance and fixture congestion</li>
+    <li>Form: won 3 of the last 5, never lost twice in a row</li>
+    <li>Home record: won 3 of the last 4 home games</li>
+    <li>Away record: won 3 of the last 4 away games, the opponent lost 2 of their last 4 at home, and the away team is top 4 with the home team bottom 6 (internationals: away top 10 in the FIFA ranking, home ranked 50 or lower)</li>
+    <li>Head to head: won 2 of the last 3 meetings</li>
+    <li>Goals: scored 2 or more in 3 of the last 5</li>
+    <li>Odds: single odd between 1.20 and 1.50</li>
+    <li>Defence: scored 8 or more in the last 5 (scoring in 4 of them), conceded 5 or fewer with 2 or more clean sheets</li>
   </ol>
-
-  <div class="vip">
-    <h2 style="margin:0 0 6px">Join VIP</h2>
+  <section class="vip">
+    <h2>Join VIP</h2>
     <p>Get extra picks and booking codes before the match.</p>
-    <a class="btn" id="vipbtn" href="#" target="_blank" rel="noopener">Join VIP on WhatsApp</a>
-  </div>
-  <footer>Betting involves risk. Only bet what you can afford to lose. 18+ only.</footer>
+    <a href="https://wa.me/256748957327?text=Hello%20Slick%20Games%2C%20I%20want%20to%20join%20VIP" target="_blank" rel="noopener">Join VIP on WhatsApp</a>
+  </section>
 </main>
+<footer>Betting involves risk. Only play what you can afford to lose. 18+ only.</footer>
 <script>
-const WHATSAPP = "256748957327";
-const TICKETS = [
-  {id:"ultra", name:"Ultra Safe", odds:"1.40"},
-  {id:"safe",  name:"Safe",       odds:"2.00"},
-  {id:"value", name:"Value",      odds:"3.00"},
-  {id:"jackpot",name:"Jackpot",   odds:"10.00"}
-];
-/* Add games here. rules = 8 values, 1 = YES, 0 = NO
-   Example:
-   {ticket:"ultra", home:"Arsenal", away:"Burnley", pick:"Home Win", odd:"1.25",
-    rules:[1,1,1,1,1,1,1,1], why:"Arsenal unbeaten at home in 10.", code:"ABC123"},
-*/
-const GAMES = [
-];
-
-const tabs = document.getElementById("tabs");
-const list = document.getElementById("list");
-let current = TICKETS[0].id;
-document.getElementById("vipbtn").href =
-  "https://wa.me/" + WHATSAPP + "?text=" + encodeURIComponent("Hello Slick Games, I want to join VIP.");
-
-function esc(s){return String(s).replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]))}
-
+const TICKETS=[{key:'ULTRA_SAFE',name:'Ultra Safe',target:'1.50'},{key:'SAFE',name:'Safe',target:'2.00'},{key:'VALUE',name:'Value',target:'3.00'}];
+let data=null,current='ULTRA_SAFE';
+const tabs=document.getElementById('tabs');
+const box=document.getElementById('box');
+function esc(s){return String(s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));}
 function drawTabs(){
-  tabs.innerHTML = "";
-  TICKETS.forEach(t=>{
-    const b = document.createElement("button");
-    b.className = "tab" + (t.id===current ? " on" : "");
-    b.innerHTML = "<b>"+esc(t.name)+"</b><small>"+esc(t.odds)+" odds</small>";
-    b.onclick = ()=>{current=t.id;drawTabs();drawGames()};
-    tabs.appendChild(b);
-  });
+  tabs.innerHTML=TICKETS.map(t=>`<button class="tab" role="tab" aria-selected="${t.key===current}" data-k="${t.key}">${t.name}<small>${t.target} odds</small></button>`).join('');
+  tabs.querySelectorAll('.tab').forEach(b=>b.onclick=()=>{current=b.dataset.k;drawTabs();drawBox();});
 }
-
-function drawGames(){
-  const games = GAMES.filter(g=>g.ticket===current);
-  if(!games.length){
-    list.innerHTML = '<div class="empty">No games on this ticket yet. Check back at 11:00 AM.</div>';
+function kickoff(iso){try{return new Date(iso).toLocaleTimeString([],{hour:'2-digit',minute:'2-digit'});}catch(e){return '';}}
+function drawBox(){
+  if(!data){box.innerHTML='<div class="empty">Loading today\u2019s picks\u2026</div>';return;}
+  const t=data.tickets&&data.tickets[current];
+  if(!t||!t.games||!t.games.length){
+    box.innerHTML='<div class="empty">No games passed all 7 rules for this ticket today. New picks come at 11:00 AM.</div>';
     return;
   }
-  list.innerHTML = games.map(g=>{
-    const rules = (g.rules||[]).map((v,i)=>'<span class="r '+(v?'y':'n')+'">R'+(i+1)+' '+(v?'YES':'NO')+'</span>').join("");
-    return '<div class="game">'
-      +'<div class="teams">'+esc(g.home)+' vs '+esc(g.away)+'</div>'
-      +'<div class="row"><span>Pick: <span class="pick">'+esc(g.pick)+'</span></span><span>Odd: '+esc(g.odd)+'</span></div>'
-      +(rules?'<div class="rules">'+rules+'</div>':'')
-      +(g.why?'<div class="why">'+esc(g.why)+'</div>':'')
-      +(g.code?'<div class="code">BetPawa code: '+esc(g.code)+'</div>':'')
-      +'</div>';
-  }).join("");
+  box.innerHTML=t.games.map(g=>`<div class="game"><div class="lg">${esc(g.league)} \u00b7 ${esc(kickoff(g.time))}</div><div class="teams">${esc(g.home)} v ${esc(g.away)}</div><div class="row"><span class="pick">Pick: ${esc(g.pick_team)} to win</span><span class="odd">${Number(g.odd).toFixed(2)}</span></div></div>`).join('')
+  +`<div class="total"><span>Total odds</span><strong class="odd">${Number(t.total_odds).toFixed(2)}</strong></div><div class="lg" style="margin-top:8px">Picks for ${esc(data.date)}</div>`;
 }
-drawTabs();
-drawGames();
+drawTabs();drawBox();
+fetch('data/games.json?t='+Date.now()).then(r=>r.json()).then(j=>{data=j;drawBox();}).catch(()=>{box.innerHTML='<div class="empty">Could not load today\u2019s picks. Refresh the page.</div>';});
 </script>
 </body>
-  </html>
+</html>
