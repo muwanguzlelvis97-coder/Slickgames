@@ -2,7 +2,7 @@ import { mkdirSync, writeFileSync, readFileSync, existsSync } from 'fs';
 
 const KEY = process.env.API_FOOTBALL_KEY;
 const BASE = 'https://v3.football.api-sports.io';
-const MAX_REQUESTS = 90;
+const MAX_REQUESTS = 30;
 const ALLOW_HOME_PICKS = false;
 
 const LEAGUES = {
@@ -76,10 +76,24 @@ const out = {
 };
 const reject = (game, why) => out.rejected.push({ game, why });
 
+// Keep earlier picks from the same day and remember which games were checked
+let prev = null;
+if (existsSync('data/games.json')) {
+  try { prev = JSON.parse(readFileSync('data/games.json', 'utf8')); } catch (e) {}
+}
+const sameDay = prev && prev.date === date;
+const checked = new Set(sameDay ? (prev.checked || []) : []);
+let limitHit = false;
+if (sameDay) {
+  out.passed = prev.passed || [];
+  out.rejected = prev.rejected || [];
+  out.tickets = prev.tickets || {};
+}
+
 const fixtures = await api(`/fixtures?date=${date}`);
 const isIntl = f => INTERNATIONAL[f.league.id] !== undefined;
 const wanted = fixtures.filter(f =>
-  (LEAGUES[f.league.id] || isIntl(f)) && f.fixture.status.short === 'NS');
+  (LEAGUES[f.league.id] || isIntl(f)) && f.fixture.status.short === 'NS' && !checked.has(f.fixture.id));
 out.games_in_leagues = wanted.length;
 console.log('Leagues found today:', [...new Set(wanted.map(f => `${f.league.id} ${f.league.name} (${f.league.country})`))]);
 
@@ -167,22 +181,34 @@ try {
         time: f.fixture.date, pick, pick_team: me.name, odd
       });
     } catch (e) {
-      if (e.message === 'LIMIT') { reject(label, 'request limit reached'); break; }
+      if (e.message === 'LIMIT') { limitHit = true; reject(label, 'request limit reached'); break; }
       reject(label, 'error ' + e.message);
+    } finally {
+      if (!limitHit) checked.add(f.fixture.id);
     }
   }
 } catch (e) {
   console.log('Stopped early:', e.message);
 }
 
+// Remove duplicate rejection lines
+const seen = new Set();
+out.rejected = out.rejected.filter(r => {
+  const k = r.game + '|' + r.why;
+  if (seen.has(k)) return false;
+  seen.add(k);
+  return true;
+});
+
 out.passed.sort((a, b) => a.odd - b.odd);
 const make = n => ({
   games: out.passed.slice(0, n),
   total_odds: Math.round(out.passed.slice(0, n).reduce((a, g) => a * g.odd, 1) * 100) / 100
 });
-if (out.passed.length >= 2) out.tickets.ULTRA_SAFE = make(2);
-if (out.passed.length >= 3) out.tickets.SAFE = make(3);
-if (out.passed.length >= 4) out.tickets.VALUE = make(4);
+if (!out.tickets.ULTRA_SAFE && out.passed.length >= 2) out.tickets.ULTRA_SAFE = make(2);
+if (!out.tickets.SAFE && out.passed.length >= 3) out.tickets.SAFE = make(3);
+if (!out.tickets.VALUE && out.passed.length >= 4) out.tickets.VALUE = make(4);
+out.checked = [...checked];
 
 out.requests_used = used;
 mkdirSync('data', { recursive: true });
