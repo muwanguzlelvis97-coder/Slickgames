@@ -1,0 +1,5 @@
+{
+  "top10": ["Spain","Argentina","France","England","Portugal","Brazil","Netherlands","Morocco","Belgium","Germany"],
+  "top49": ["Spain","Argentina","France","England","Portugal","Brazil","Netherlands","Morocco","Belgium","Germany","Croatia","Switzerland","Italy","Colombia","Uruguay","USA","Senegal","Mexico","Japan","Denmark","Austria","Turkey","Ecuador","Iran","Australia","South Korea","Nigeria","Canada","Algeria","Egypt","Norway","Ukraine","Panama","Poland","Hungary","Scotland","Serbia","Sweden","Czech Republic","Ivory Coast","Paraguay","Tunisia","Cameroon","Mali","South Africa","Slovakia","Greece","Romania","Venezuela"],
+  "aliases": {"united states":"usa","korea republic":"south korea","czechia":"czech republic","türkiye":"turkey","cote d'ivoire":"ivory coast","côte d'ivoire":"ivory coast","ir iran":"iran"}
+}
