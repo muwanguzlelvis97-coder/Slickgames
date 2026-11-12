@@ -1,4 +1,4 @@
-import { mkdirSync, writeFileSync } from 'fs';
+import { mkdirSync, writeFileSync, readFileSync, existsSync } from 'fs';
 
 const KEY = process.env.API_FOOTBALL_KEY;
 const BASE = 'https://v3.football.api-sports.io';
@@ -6,14 +6,27 @@ const MAX_REQUESTS = 90;
 const ALLOW_HOME_PICKS = false;
 
 const LEAGUES = {
-  39: 'England Premier League',
-  40: 'England Championship',
-  78: 'Germany Bundesliga',
-  88: 'Netherlands Eredivisie',
-  94: 'Portugal Primeira Liga',
-  144: 'Belgium Pro League',
-  253: 'USA MLS'
+  39: 'England Premier League', 40: 'England Championship', 78: 'Germany Bundesliga',
+  88: 'Netherlands Eredivisie', 94: 'Portugal Primeira Liga', 144: 'Belgium Pro League', 253: 'USA MLS'
 };
+const INTERNATIONAL = {
+  1: 'World Cup', 4: 'Euros', 32: 'WC Qualifiers Europe', 34: 'WC Qualifiers South America',
+  29: 'WC Qualifiers Africa', 30: 'WC Qualifiers Asia', 31: 'WC Qualifiers CONCACAF',
+  33: 'WC Qualifiers Oceania', 37: 'WC Intercontinental Playoffs', 960: 'Euro Qualifiers',
+  10: 'International Friendlies'
+};
+const FRIENDLY_ID = 10;
+
+let FIFA = { top10: [], top49: [], aliases: {} };
+if (existsSync('data/fifa.json')) FIFA = JSON.parse(readFileSync('data/fifa.json', 'utf8'));
+const norm = (n) => {
+  const k = String(n || '').toLowerCase().trim();
+  return (FIFA.aliases && FIFA.aliases[k]) || k;
+};
+const TOP10 = new Set(FIFA.top10.map(norm));
+const TOP49 = new Set(FIFA.top49.map(norm));
+const isTop10 = (name) => TOP10.has(norm(name));
+const isRank50Plus = (name) => !TOP49.has(norm(name));
 
 let used = 0;
 const sleep = ms => new Promise(r => setTimeout(r, ms));
@@ -25,9 +38,7 @@ async function api(path) {
   used++;
   const res = await fetch(BASE + path, { headers: { 'x-apisports-key': KEY } });
   const data = await res.json();
-  if (data.errors && Object.keys(data.errors).length) {
-    throw new Error(JSON.stringify(data.errors));
-  }
+  if (data.errors && Object.keys(data.errors).length) throw new Error(JSON.stringify(data.errors));
   return data.response;
 }
 
@@ -66,14 +77,17 @@ const out = {
 const reject = (game, why) => out.rejected.push({ game, why });
 
 const fixtures = await api(`/fixtures?date=${date}`);
-const wanted = fixtures.filter(f => LEAGUES[f.league.id] && f.fixture.status.short === 'NS');
+const isIntl = f => INTERNATIONAL[f.league.id] !== undefined;
+const wanted = fixtures.filter(f =>
+  (LEAGUES[f.league.id] || isIntl(f)) && f.fixture.status.short === 'NS');
 out.games_in_leagues = wanted.length;
 console.log('Leagues found today:', [...new Set(wanted.map(f => `${f.league.id} ${f.league.name} (${f.league.country})`))]);
 
 try {
   const standings = {};
-  for (const lid of new Set(wanted.map(f => f.league.id))) {
-    const season = wanted.find(f => f.league.id === lid).league.season;
+  const clubWanted = wanted.filter(f => !isIntl(f));
+  for (const lid of new Set(clubWanted.map(f => f.league.id))) {
+    const season = clubWanted.find(f => f.league.id === lid).league.season;
     try {
       const r = await api(`/standings?league=${lid}&season=${season}`);
       for (const g of (r[0]?.league?.standings || [])) {
@@ -88,20 +102,33 @@ try {
   const candidates = [];
   for (const f of wanted) {
     const label = `${f.teams.home.name} v ${f.teams.away.name}`;
-    const h = standings[`${f.league.id}-${f.teams.home.id}`];
-    const a = standings[`${f.league.id}-${f.teams.away.id}`];
-    if (!h || !a) { reject(label, 'no standings'); continue; }
-    const bottom6 = x => x.rank >= x.n - 5;
     let pick = null;
-    if (a.rank <= 4 && bottom6(h)) pick = 'away';
-    else if (ALLOW_HOME_PICKS && h.rank <= 4 && bottom6(a)) pick = 'home';
-    if (!pick) { reject(label, 'R3 positions'); continue; }
+    if (isIntl(f)) {
+      if (!FIFA.top10.length) { reject(label, 'no FIFA ranking file'); continue; }
+      if (isTop10(f.teams.away.name) && isRank50Plus(f.teams.home.name)) pick = 'away';
+      if (!pick) { reject(label, 'R3 FIFA ranking'); continue; }
+    } else {
+      const h = standings[`${f.league.id}-${f.teams.home.id}`];
+      const a = standings[`${f.league.id}-${f.teams.away.id}`];
+      if (!h || !a) { reject(label, 'no standings'); continue; }
+      const bottom6 = x => x.rank >= x.n - 5;
+      if (a.rank <= 4 && bottom6(h)) pick = 'away';
+      else if (ALLOW_HOME_PICKS && h.rank <= 4 && bottom6(a)) pick = 'home';
+      if (!pick) { reject(label, 'R3 positions'); continue; }
+    }
     candidates.push({ f, pick });
   }
   out.candidates = candidates.length;
 
+  candidates.sort((x, y) =>
+    (x.f.league.id === FRIENDLY_ID ? 1 : 0) - (y.f.league.id === FRIENDLY_ID ? 1 : 0));
+
   for (const { f, pick } of candidates) {
     const label = `${f.teams.home.name} v ${f.teams.away.name}`;
+    if (f.league.id === FRIENDLY_ID && out.passed.length > 0) {
+      reject(label, 'friendly skipped (other games passed)');
+      continue;
+    }
     try {
       const me = pick === 'away' ? f.teams.away : f.teams.home;
       const opp = pick === 'away' ? f.teams.home : f.teams.away;
@@ -150,7 +177,7 @@ try {
 
 out.passed.sort((a, b) => a.odd - b.odd);
 const make = n => ({
-  games: out.passed.slice(0, n).map(g => g.id),
+  games: out.passed.slice(0, n),
   total_odds: Math.round(out.passed.slice(0, n).reduce((a, g) => a * g.odd, 1) * 100) / 100
 });
 if (out.passed.length >= 2) out.tickets.ULTRA_SAFE = make(2);
