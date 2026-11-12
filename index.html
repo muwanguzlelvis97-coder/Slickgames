@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Slick Games – Daily BetPawa Tips (Uganda)</title>
+<style>
+:root{--bg:#0b1a12;--card:#12281c;--line:#1f4030;--text:#eef5ef;--mute:#9db8a5;--gold:#f5c542;--green:#2ecc71;--red:#e5534b}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:Georgia,'Times New Roman',serif;background:var(--bg);color:var(--text);line-height:1.5;padding-bottom:40px}
+header{padding:28px 18px 18px;text-align:center;border-bottom:3px solid var(--gold)}
+h1{font-size:2rem;letter-spacing:.5px}
+h1 span{color:var(--gold)}
+.sub{color:var(--mute);margin-top:6px;font-size:.95rem}
+main{max-width:640px;margin:0 auto;padding:16px}
+.tabs{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin:6px 0 16px}
+.tab{background:var(--card);border:1px solid var(--line);color:var(--text);padding:12px 8px;border-radius:10px;font:inherit;cursor:pointer;text-align:center}
+.tab b{display:block;font-size:1.05rem}
+.tab small{color:var(--mute)}
+.tab.on{border-color:var(--gold);background:#1a3a28}
+.game{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:14px;margin-bottom:12px}
+.teams{font-size:1.1rem;font-weight:bold}
+.row{display:flex;justify-content:space-between;gap:10px;margin-top:6px;color:var(--mute);font-size:.95rem}
+.pick{color:var(--gold);font-weight:bold}
+.why{margin-top:8px;font-size:.92rem}
+.code{margin-top:8px;font-family:monospace;background:#0b1a12;padding:6px 10px;border-radius:8px;display:inline-block}
+.rules{display:flex;flex-wrap:wrap;gap:4px;margin-top:8px}
+.r{font-size:.75rem;padding:2px 7px;border-radius:6px;border:1px solid var(--line)}
+.r.y{background:#14432a;color:var(--green)}
+.r.n{background:#471b19;color:var(--red)}
+.empty{text-align:center;color:var(--mute);padding:28px 10px;border:1px dashed var(--line);border-radius:12px}
+h2{font-size:1.2rem;margin:26px 0 10px;color:var(--gold)}
+ol{padding-left:22px}
+ol li{margin-bottom:6px}
+.vip{background:linear-gradient(135deg,#1a3a28,#0f2519);border:1px solid var(--gold);border-radius:14px;padding:18px;text-align:center;margin-top:26px}
+.btn{display:inline-block;margin-top:12px;background:var(--gold);color:#1a1300;font-weight:bold;text-decoration:none;padding:12px 22px;border-radius:10px}
+footer{text-align:center;color:var(--mute);font-size:.8rem;padding:24px 16px 0}
+</style>
+</head>
+<body>
+<header>
+  <h1>Slick <span>Games</span></h1>
+  <p class="sub">Daily BetPawa tips for Uganda. New picks every day at 11:00 AM.</p>
+</header>
+<main>
+  <div class="tabs" id="tabs"></div>
+  <div id="list"></div>
+
+  <h2>Our 8-rule check</h2>
+  <ol>
+    <li>Team form over the last 5 matches</li>
+    <li>Head-to-head record</li>
+    <li>Home and away record</li>
+    <li>Injuries and suspensions</li>
+    <li>Goals scored and conceded</li>
+    <li>League position and motivation</li>
+    <li>Odds value on BetPawa</li>
+    <li>Match importance and fixture congestion</li>
+  </ol>
+
+  <div class="vip">
+    <h2 style="margin:0 0 6px">Join VIP</h2>
+    <p>Get extra picks and booking codes before the match.</p>
+    <a class="btn" id="vipbtn" href="#" target="_blank" rel="noopener">Join VIP on WhatsApp</a>
+  </div>
+  <footer>Betting involves risk. Only bet what you can afford to lose. 18+ only.</footer>
+</main>
+<script>
+const WHATSAPP = "256748957327";
+const TICKETS = [
+  {id:"ultra", name:"Ultra Safe", odds:"1.40"},
+  {id:"safe",  name:"Safe",       odds:"2.00"},
+  {id:"value", name:"Value",      odds:"3.00"},
+  {id:"jackpot",name:"Jackpot",   odds:"10.00"}
+];
+/* Add games here. rules = 8 values, 1 = YES, 0 = NO
+   Example:
+   {ticket:"ultra", home:"Arsenal", away:"Burnley", pick:"Home Win", odd:"1.25",
+    rules:[1,1,1,1,1,1,1,1], why:"Arsenal unbeaten at home in 10.", code:"ABC123"},
+*/
+const GAMES = [
+];
+
+const tabs = document.getElementById("tabs");
+const list = document.getElementById("list");
+let current = TICKETS[0].id;
+document.getElementById("vipbtn").href =
+  "https://wa.me/" + WHATSAPP + "?text=" + encodeURIComponent("Hello Slick Games, I want to join VIP.");
+
+function esc(s){return String(s).replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]))}
+
+function drawTabs(){
+  tabs.innerHTML = "";
+  TICKETS.forEach(t=>{
+    const b = document.createElement("button");
+    b.className = "tab" + (t.id===current ? " on" : "");
+    b.innerHTML = "<b>"+esc(t.name)+"</b><small>"+esc(t.odds)+" odds</small>";
+    b.onclick = ()=>{current=t.id;drawTabs();drawGames()};
+    tabs.appendChild(b);
+  });
+}
+
+function drawGames(){
+  const games = GAMES.filter(g=>g.ticket===current);
+  if(!games.length){
+    list.innerHTML = '<div class="empty">No games on this ticket yet. Check back at 11:00 AM.</div>';
+    return;
+  }
+  list.innerHTML = games.map(g=>{
+    const rules = (g.rules||[]).map((v,i)=>'<span class="r '+(v?'y':'n')+'">R'+(i+1)+' '+(v?'YES':'NO')+'</span>').join("");
+    return '<div class="game">'
+      +'<div class="teams">'+esc(g.home)+' vs '+esc(g.away)+'</div>'
+      +'<div class="row"><span>Pick: <span class="pick">'+esc(g.pick)+'</span></span><span>Odd: '+esc(g.odd)+'</span></div>'
+      +(rules?'<div class="rules">'+rules+'</div>':'')
+      +(g.why?'<div class="why">'+esc(g.why)+'</div>':'')
+      +(g.code?'<div class="code">BetPawa code: '+esc(g.code)+'</div>':'')
+      +'</div>';
+  }).join("");
+}
+drawTabs();
+drawGames();
+</script>
+</body>
+  </html>
