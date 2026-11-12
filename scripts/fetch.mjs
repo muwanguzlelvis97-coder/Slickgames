@@ -3,6 +3,7 @@ import { mkdirSync, writeFileSync, readFileSync, existsSync } from 'fs';
 const KEY = process.env.API_FOOTBALL_KEY;
 const BASE = 'https://v3.football.api-sports.io';
 const MAX_REQUESTS = 30;
+const MIN_RULES = 4; // a game must pass at least 4 of the 7 rules
 const ALLOW_HOME_PICKS = false;
 
 const LEAGUES = {
@@ -113,6 +114,7 @@ try {
     }
   }
 
+  // Entry gate: league position (clubs) or FIFA ranking (internationals) picks the team
   const candidates = [];
   for (const f of wanted) {
     const label = `${f.teams.home.name} v ${f.teams.away.name}`;
@@ -156,29 +158,37 @@ try {
       }
       if (!vals.length) { reject(label, 'no odds'); continue; }
       const odd = Math.round((vals.reduce((a, b) => a + b, 0) / vals.length) * 100) / 100;
-      if (odd < 1.2 || odd > 1.5) { reject(label, `R6 odds ${odd}`); continue; }
 
       const mine = summarize(await api(`/fixtures?team=${me.id}&last=15`), me.id);
       if (mine.results.length < 5 || mine.home4.length < 4 || mine.away4.length < 4) {
         reject(label, 'not enough history'); continue;
       }
-      if (!ruleForm(mine.results)) { reject(label, 'R1 form'); continue; }
-      if (count(mine.home4, 'W') < 3) { reject(label, 'R2 home'); continue; }
-      if (count(mine.away4, 'W') < 3) { reject(label, 'R3 away form'); continue; }
-      if (!ruleGoals(mine.scored)) { reject(label, 'R5 goals'); continue; }
-      if (!ruleScoredDefended(mine.scored, mine.conceded)) { reject(label, 'R7 scored/defended'); continue; }
-
       const theirs = summarize(await api(`/fixtures?team=${opp.id}&last=15`), opp.id);
       const venue = pick === 'away' ? theirs.home4 : theirs.away4;
-      if (venue.length < 4 || count(venue, 'L') < 2) { reject(label, 'R3 opponent'); continue; }
-
       const h2h = summarize(await api(`/fixtures/headtohead?h2h=${me.id}-${opp.id}&last=3`), me.id).results;
-      if (count(h2h, 'W') < 2) { reject(label, 'R4 h2h'); continue; }
+
+      // Score the 7 rules (true = passed)
+      const r = {
+        1: ruleForm(mine.results),
+        2: count(mine.home4, 'W') >= 3,
+        3: count(mine.away4, 'W') >= 3 && venue.length >= 4 && count(venue, 'L') >= 2,
+        4: count(h2h, 'W') >= 2,
+        5: ruleGoals(mine.scored),
+        6: odd >= 1.2 && odd <= 1.5,
+        7: ruleScoredDefended(mine.scored, mine.conceded)
+      };
+      const failed = Object.keys(r).filter(k => !r[k]).map(Number);
+      const score = 7 - failed.length;
+      if (score < MIN_RULES) {
+        reject(label, `only ${score}/7 (failed R${failed.join(', R')})`);
+        continue;
+      }
 
       out.passed.push({
         id: f.fixture.id, league: f.league.name,
         home: f.teams.home.name, away: f.teams.away.name,
-        time: f.fixture.date, pick, pick_team: me.name, odd
+        time: f.fixture.date, pick, pick_team: me.name, odd,
+        score, failed_rules: failed
       });
     } catch (e) {
       if (e.message === 'LIMIT') { limitHit = true; reject(label, 'request limit reached'); break; }
@@ -191,7 +201,6 @@ try {
   console.log('Stopped early:', e.message);
 }
 
-// Remove duplicate rejection lines
 const seen = new Set();
 out.rejected = out.rejected.filter(r => {
   const k = r.game + '|' + r.why;
@@ -200,7 +209,8 @@ out.rejected = out.rejected.filter(r => {
   return true;
 });
 
-out.passed.sort((a, b) => a.odd - b.odd);
+// Best score first, then lowest odd
+out.passed.sort((a, b) => (b.score || 0) - (a.score || 0) || a.odd - b.odd);
 const make = n => ({
   games: out.passed.slice(0, n),
   total_odds: Math.round(out.passed.slice(0, n).reduce((a, g) => a * g.odd, 1) * 100) / 100
@@ -213,4 +223,4 @@ out.checked = [...checked];
 out.requests_used = used;
 mkdirSync('data', { recursive: true });
 writeFileSync('data/games.json', JSON.stringify(out, null, 2));
-console.log(`Passed 7/7: ${out.passed.length}. Requests used: ${used}`);
+console.log(`Passed ${MIN_RULES}/7 or more: ${out.passed.length}. Requests used: ${used}`);
