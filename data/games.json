@@ -1,0 +1,110 @@
+{
+  "date": "2026-11-12",
+  "games": [
+    {
+      "id": 1557232,
+      "league": "USL Super League",
+      "home": "DC Power W",
+      "away": "Brooklyn W",
+      "time": "2026-11-12T00:00:00+00:00"
+    },
+    {
+      "id": 1600657,
+      "league": "Primera Division",
+      "home": "FAS",
+      "away": "Inter",
+      "time": "2026-11-12T01:00:00+00:00"
+    },
+    {
+      "id": 1649465,
+      "league": "Liga MX Femenil",
+      "home": "América W",
+      "away": "Toluca W",
+      "time": "2026-11-12T01:00:00+00:00"
+    },
+    {
+      "id": 1647449,
+      "league": "Primera B",
+      "home": "Quindio",
+      "away": "Tigres FC",
+      "time": "2026-11-12T01:10:00+00:00"
+    },
+    {
+      "id": 1649518,
+      "league": "Liga de Expansión MX",
+      "home": "Piratas",
+      "away": "CA La Paz",
+      "time": "2026-11-12T02:00:00+00:00"
+    },
+    {
+      "id": 1649466,
+      "league": "Liga MX Femenil",
+      "home": "Pachuca W",
+      "away": "Monterrey W",
+      "time": "2026-11-12T03:00:00+00:00"
+    },
+    {
+      "id": 1586134,
+      "league": "Friendlies",
+      "home": "New Zealand",
+      "away": "India",
+      "time": "2026-11-12T06:10:00+00:00"
+    },
+    {
+      "id": 1649008,
+      "league": "Friendlies",
+      "home": "Thailand U23",
+      "away": "Qatar U23",
+      "time": "2026-11-12T08:00:00+00:00"
+    },
+    {
+      "id": 1640360,
+      "league": "Australian Championship",
+      "home": "Wests APIA",
+      "away": "Adelaide City",
+      "time": "2026-11-12T08:30:00+00:00"
+    },
+    {
+      "id": 1644130,
+      "league": "Ýokary Liga",
+      "home": "Arkadag",
+      "away": "Altyn Asyr",
+      "time": "2026-11-12T10:00:00+00:00"
+    },
+    {
+      "id": 1648253,
+      "league": "WK-League",
+      "home": "Hwacheon KSPO W",
+      "away": "Gyeongju W",
+      "time": "2026-11-12T10:00:00+00:00"
+    },
+    {
+      "id": 1644894,
+      "league": "Ligue 1",
+      "home": "Tanganyika",
+      "away": "AS New Soger",
+      "time": "2026-11-12T10:30:00+00:00"
+    },
+    {
+      "id": 1649923,
+      "league": "Friendlies Clubs",
+      "home": "Genk",
+      "away": "AS Eupen",
+      "time": "2026-11-12T11:00:00+00:00"
+    },
+    {
+      "id": 1649924,
+      "league": "Friendlies Clubs",
+      "home": "Hannover 96",
+      "away": "Havelse",
+      "time": "2026-11-12T11:00:00+00:00"
+    },
+    {
+      "id": 1646213,
+      "league": "Ligue 1",
+      "home": "Céleste",
+      "away": "Maniema Union",
+      "time": "2026-11-12T12:00:00+00:00"
+    }
+  ]
+}
