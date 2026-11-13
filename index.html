@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Slick Games | Daily BetPawa Tips for Uganda</title>
-<meta name="description" content="Daily BetPawa tips for Uganda. Every pick is scored on a 6-rule check. New picks every day at 11:00 AM.">
+<meta name="description" content="Daily BetPawa tips for Uganda. Every pick is scored on a 6-rule check. New picks every day at midnight and midday.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Noto+Serif:wght@400;600;700&display=swap" rel="stylesheet">
@@ -59,7 +59,7 @@ footer{text-align:center;color:var(--muted);font-size:.9rem;padding:8px 0 40px}
 <div class="wrap">
   <header>
     <h1>Slick <span>Games</span></h1>
-    <p>Daily BetPawa tips for Uganda. New picks every day at 11:00 AM.</p>
+    <p>Daily BetPawa tips for Uganda. New picks every day at midnight and midday.</p>
   </header>
 
   <div class="tabs" role="tablist" aria-label="Ticket types">
@@ -111,10 +111,10 @@ footer{text-align:center;color:var(--muted);font-size:.9rem;padding:8px 0 40px}
   function render(){
     if (failed){ box.innerHTML = '<div class="empty">Could not load today’s picks. Refresh the page.</div>'; return; }
     if (!data){ return; }
-    var today = new Date().toISOString().slice(0,10);
+    var today = new Date(Date.now() + 3 * 3600 * 1000).toISOString().slice(0,10);
     var t = data.date === today && data.tickets && data.tickets[current];
     if (!t || !t.games || !t.games.length){
-      box.innerHTML = '<div class="empty">No games passed for this ticket today. New picks come at 11:00 AM.</div>';
+      box.innerHTML = '<div class="empty">No games passed for this ticket today. New picks come at midnight and midday.</div>';
       return;
     }
     box.innerHTML = t.games.map(function(g){
@@ -142,4 +142,4 @@ footer{text-align:center;color:var(--muted);font-size:.9rem;padding:8px 0 40px}
 })();
 </script>
 </body>
-                                                                        </html>
+</html>
