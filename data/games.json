@@ -1,152 +1,83 @@
 {
-  "date": "2026-11-13",
-  "generated_at": "2026-11-13T13:54:45.075Z",
-  "games_in_leagues": 15,
-  "candidates": 15,
-  "requests_used": 30,
+  "date": "2026-11-14",
+  "generated_at": "2026-11-13T21:36:10.753Z",
+  "games_in_leagues": 14,
+  "candidates": 14,
+  "requests_used": 25,
   "passed": [],
   "tickets": {},
   "rejected": [
     {
-      "game": "Czechia U18 v Poland U18",
-      "why": "no FIFA ranking file"
+      "game": "Colombia v Chile",
+      "why": "error {\"plan\":\"Free plans do not have access to the Last parameter.\"}"
     },
     {
-      "game": "Singapore v Paraguay",
-      "why": "no FIFA ranking file"
+      "game": "Ecuador v Costa Rica",
+      "why": "error {\"plan\":\"Free plans do not have access to the Last parameter.\"}"
     },
     {
-      "game": "Chinese Taipei v Kyrgyzstan",
-      "why": "no FIFA ranking file"
+      "game": "Peru v Bolivia",
+      "why": "error {\"plan\":\"Free plans do not have access to the Last parameter.\"}"
     },
     {
-      "game": "United Arab Emirates v Honduras",
-      "why": "no FIFA ranking file"
+      "game": "Bahrain v Yemen",
+      "why": "error {\"plan\":\"Free plans do not have access to the Last parameter.\"}"
     },
     {
-      "game": "Saudi Arabia v South Korea",
-      "why": "no FIFA ranking file"
-    },
-    {
-      "game": "Qatar v Australia",
-      "why": "no FIFA ranking file"
-    },
-    {
-      "game": "Kuwait v Syria",
-      "why": "no FIFA ranking file"
-    },
-    {
-      "game": "Poland U21 v Norway U21",
-      "why": "no FIFA ranking file"
-    },
-    {
-      "game": "Germany U21 v Belgium U21",
-      "why": "no FIFA ranking file"
-    },
-    {
-      "game": "France U21 v Italy U21",
-      "why": "no FIFA ranking file"
-    },
-    {
-      "game": "Albania U21 v Luxembourg U21",
-      "why": "no FIFA ranking file"
-    },
-    {
-      "game": "Spain U21 v Japan U21",
-      "why": "no FIFA ranking file"
-    },
-    {
-      "game": "Chile U20 v Mexico U20",
-      "why": "no FIFA ranking file"
-    },
-    {
-      "game": "England U21 v Portugal U21",
-      "why": "no FIFA ranking file"
-    },
-    {
-      "game": "Argentina v Uruguay",
-      "why": "no FIFA ranking file"
-    },
-    {
-      "game": "Brazil U20 v Peru U20",
-      "why": "no FIFA ranking file"
-    },
-    {
-      "game": "Czechia U18 v Poland U18",
+      "game": "Korea Republic U21 v Mexico U23",
       "why": "no odds"
     },
     {
-      "game": "Chinese Taipei v Kyrgyzstan",
+      "game": "Thailand U23 v Singapore U23",
       "why": "error {\"plan\":\"Free plans do not have access to the Last parameter.\"}"
     },
     {
-      "game": "United Arab Emirates v Honduras",
+      "game": "Japan v Brazil",
       "why": "error {\"plan\":\"Free plans do not have access to the Last parameter.\"}"
     },
     {
-      "game": "Saudi Arabia v South Korea",
+      "game": "England U18 v Norway U19",
+      "why": "no odds"
+    },
+    {
+      "game": "Netherlands U18 v Switzerland U18",
+      "why": "no odds"
+    },
+    {
+      "game": "China v Malaysia",
       "why": "error {\"plan\":\"Free plans do not have access to the Last parameter.\"}"
     },
     {
-      "game": "Qatar v Australia",
+      "game": "Vietnam U23 v Qatar U23",
       "why": "error {\"plan\":\"Free plans do not have access to the Last parameter.\"}"
     },
     {
-      "game": "Kuwait v Syria",
+      "game": "Palestine v Iran",
       "why": "error {\"plan\":\"Free plans do not have access to the Last parameter.\"}"
     },
     {
-      "game": "Poland U21 v Norway U21",
-      "why": "error {\"plan\":\"Free plans do not have access to the Last parameter.\"}"
+      "game": "Turkey U18 v Germany U18",
+      "why": "no odds"
     },
     {
-      "game": "Germany U21 v Belgium U21",
-      "why": "error {\"plan\":\"Free plans do not have access to the Last parameter.\"}"
-    },
-    {
-      "game": "France U21 v Italy U21",
-      "why": "error {\"plan\":\"Free plans do not have access to the Last parameter.\"}"
-    },
-    {
-      "game": "Chile U20 v Mexico U20",
-      "why": "error {\"plan\":\"Free plans do not have access to the Last parameter.\"}"
-    },
-    {
-      "game": "Albania U21 v Luxembourg U21",
-      "why": "error {\"plan\":\"Free plans do not have access to the Last parameter.\"}"
-    },
-    {
-      "game": "Spain U21 v Japan U21",
-      "why": "error {\"plan\":\"Free plans do not have access to the Last parameter.\"}"
-    },
-    {
-      "game": "England U21 v Portugal U21",
-      "why": "error {\"plan\":\"Free plans do not have access to the Last parameter.\"}"
-    },
-    {
-      "game": "Argentina v Uruguay",
-      "why": "error {\"plan\":\"Free plans do not have access to the Last parameter.\"}"
-    },
-    {
-      "game": "Brazil U20 v Peru U20",
+      "game": "Basque Country v Venezuela",
       "why": "error {\"plan\":\"Free plans do not have access to the Last parameter.\"}"
     }
   ],
   "checked": [
-    1649012,
-    1647360,
-    1647636,
-    1647361,
-    1640084,
-    1649542,
-    1649543,
-    1649013,
-    1647637,
-    1649015,
-    1649014,
-    1649544,
-    1646120,
-    1647362,
-    1649545
+    1640518,
+    1647363,
+    1647364,
+    1647638,
+    1649016,
+    1649017,
+    1640086,
+    1647639,
+    1647640,
+    1647365,
+    1649019,
+    1648285,
+    1649018,
+    1647641
   ]
 }
