@@ -3,8 +3,16 @@ import { mkdirSync, writeFileSync, readFileSync, existsSync } from 'fs';
 const KEY = process.env.API_FOOTBALL_KEY;
 const BASE = 'https://v3.football.api-sports.io';
 const MAX_REQUESTS = 30;
-const MIN_RULES = 4; // a game must pass at least 4 of the 7 rules
+const TOTAL_RULES = 6;
+const MIN_RULES = 4; // a game must pass at least 4 of the 6 checks (4/6 = Value)
 const ALLOW_HOME_PICKS = false;
+
+// Ticket tiers by score: 6/6 Ultra Safe (#1-3), 5/6 Safe (#4-7), 4/6 Value (#8-10)
+const TIERS = [
+  { key: 'ULTRA_SAFE', score: 6, max: 3 },
+  { key: 'SAFE', score: 5, max: 4 },
+  { key: 'VALUE', score: 4, max: 3 }
+];
 
 const LEAGUES = {
   39: 'England Premier League', 40: 'England Championship', 78: 'Germany Bundesliga',
@@ -63,11 +71,13 @@ function summarize(fixtures, teamId) {
   };
 }
 
-const ruleForm = r => count(r, 'W') >= 3 && !r.some((v, i) => v === 'L' && r[i + 1] === 'L');
-const ruleGoals = s => s.filter(g => g >= 2).length >= 3;
-const ruleScoredDefended = (s, c) =>
-  s.reduce((a, b) => a + b, 0) >= 8 && s.filter(g => g > 0).length >= 4 &&
-  c.reduce((a, b) => a + b, 0) <= 5 && c.filter(g => g === 0).length >= 2;
+// The 6 checks
+const ruleForm = r => count(r, 'W') >= 3 && !r.some((v, i) => v === 'L' && r[i + 1] === 'L'); // R1
+const ruleVenue = (res) => count(res, 'W') >= 3;                                               // R2 (home or away, by pick)
+const ruleH2H = h => count(h, 'W') >= 2;                                                       // R3
+const ruleGoals = s => s.filter(g => g >= 2).length >= 3;                                      // R4
+const ruleOdds = o => o >= 1.2 && o <= 1.5;                                                    // R5
+const ruleTotalGoals = s => s.reduce((a, b) => a + b, 0) >= 8;                                 // R6
 
 const date = new Date().toISOString().slice(0, 10);
 const out = {
@@ -91,21 +101,21 @@ if (sameDay) {
   out.tickets = prev.tickets || {};
 }
 
-const fixtures = await api(`/fixtures?date=${date}`);
-const isIntl = f => INTERNATIONAL[f.league.id] !== undefined;
-const wanted = fixtures.filter(f =>
-  (LEAGUES[f.league.id] || isIntl(f)) && f.fixture.status.short === 'NS' && !checked.has(f.fixture.id));
-out.games_in_leagues = wanted.length;
-console.log('Leagues found today:', [...new Set(wanted.map(f => `${f.league.id} ${f.league.name} (${f.league.country})`))]);
-
 try {
+  const fixtures = await api(`/fixtures?date=${date}`);
+  const isIntl = f => INTERNATIONAL[f.league.id] !== undefined;
+  const wanted = fixtures.filter(f =>
+    (LEAGUES[f.league.id] || isIntl(f)) && f.fixture.status.short === 'NS' && !checked.has(f.fixture.id));
+  out.games_in_leagues = wanted.length;
+  console.log('Leagues found today:', [...new Set(wanted.map(f => `${f.league.id} ${f.league.name} (${f.league.country})`))]);
+
   const standings = {};
   const clubWanted = wanted.filter(f => !isIntl(f));
   for (const lid of new Set(clubWanted.map(f => f.league.id))) {
     const season = clubWanted.find(f => f.league.id === lid).league.season;
     try {
       const r = await api(`/standings?league=${lid}&season=${season}`);
-      for (const g of (r[0]?.league?.standings || [])) {
+      for (const g of (r[0]?.league.standings || [])) {
         for (const t of g) standings[`${lid}-${t.team.id}`] = { rank: t.rank, n: g.length };
       }
     } catch (e) {
@@ -122,7 +132,7 @@ try {
     if (isIntl(f)) {
       if (!FIFA.top10.length) { reject(label, 'no FIFA ranking file'); continue; }
       if (isTop10(f.teams.away.name) && isRank50Plus(f.teams.home.name)) pick = 'away';
-      if (!pick) { reject(label, 'R3 FIFA ranking'); continue; }
+      if (!pick) { reject(label, 'entry gate: FIFA ranking'); continue; }
     } else {
       const h = standings[`${f.league.id}-${f.teams.home.id}`];
       const a = standings[`${f.league.id}-${f.teams.away.id}`];
@@ -130,7 +140,7 @@ try {
       const bottom6 = x => x.rank >= x.n - 5;
       if (a.rank <= 4 && bottom6(h)) pick = 'away';
       else if (ALLOW_HOME_PICKS && h.rank <= 4 && bottom6(a)) pick = 'home';
-      if (!pick) { reject(label, 'R3 positions'); continue; }
+      if (!pick) { reject(label, 'entry gate: league positions'); continue; }
     }
     candidates.push({ f, pick });
   }
@@ -163,24 +173,21 @@ try {
       if (mine.results.length < 5 || mine.home4.length < 4 || mine.away4.length < 4) {
         reject(label, 'not enough history'); continue;
       }
-      const theirs = summarize(await api(`/fixtures?team=${opp.id}&last=15`), opp.id);
-      const venue = pick === 'away' ? theirs.home4 : theirs.away4;
       const h2h = summarize(await api(`/fixtures/headtohead?h2h=${me.id}-${opp.id}&last=3`), me.id).results;
 
-      // Score the 7 rules (true = passed)
+      // Score the 6 checks (true = passed)
       const r = {
         1: ruleForm(mine.results),
-        2: count(mine.home4, 'W') >= 3,
-        3: count(mine.away4, 'W') >= 3 && venue.length >= 4 && count(venue, 'L') >= 2,
-        4: count(h2h, 'W') >= 2,
-        5: ruleGoals(mine.scored),
-        6: odd >= 1.2 && odd <= 1.5,
-        7: ruleScoredDefended(mine.scored, mine.conceded)
+        2: ruleVenue(pick === 'home' ? mine.home4 : mine.away4),
+        3: ruleH2H(h2h),
+        4: ruleGoals(mine.scored),
+        5: ruleOdds(odd),
+        6: ruleTotalGoals(mine.scored)
       };
       const failed = Object.keys(r).filter(k => !r[k]).map(Number);
-      const score = 7 - failed.length;
+      const score = TOTAL_RULES - failed.length;
       if (score < MIN_RULES) {
-        reject(label, `only ${score}/7 (failed R${failed.join(', R')})`);
+        reject(label, `only ${score}/${TOTAL_RULES} (failed R${failed.join(', R')})`);
         continue;
       }
 
@@ -188,7 +195,7 @@ try {
         id: f.fixture.id, league: f.league.name,
         home: f.teams.home.name, away: f.teams.away.name,
         time: f.fixture.date, pick, pick_team: me.name, odd,
-        score, failed_rules: failed
+        score, total_rules: TOTAL_RULES, failed_rules: failed
       });
     } catch (e) {
       if (e.message === 'LIMIT') { limitHit = true; reject(label, 'request limit reached'); break; }
@@ -211,16 +218,21 @@ out.rejected = out.rejected.filter(r => {
 
 // Best score first, then lowest odd
 out.passed.sort((a, b) => (b.score || 0) - (a.score || 0) || a.odd - b.odd);
-const make = n => ({
-  games: out.passed.slice(0, n),
-  total_odds: Math.round(out.passed.slice(0, n).reduce((a, g) => a * g.odd, 1) * 100) / 100
-});
-if (!out.tickets.ULTRA_SAFE && out.passed.length >= 2) out.tickets.ULTRA_SAFE = make(2);
-if (!out.tickets.SAFE && out.passed.length >= 3) out.tickets.SAFE = make(3);
-if (!out.tickets.VALUE && out.passed.length >= 4) out.tickets.VALUE = make(4);
+
+// Build tickets by score tier (once a ticket is made for the day it is kept)
+for (const t of TIERS) {
+  if (out.tickets[t.key]) continue;
+  const games = out.passed.filter(g => g.score === t.score).slice(0, t.max);
+  if (games.length) {
+    out.tickets[t.key] = {
+      games,
+      total_odds: Math.round(games.reduce((a, g) => a * g.odd, 1) * 100) / 100
+    };
+  }
+}
 out.checked = [...checked];
 
 out.requests_used = used;
 mkdirSync('data', { recursive: true });
 writeFileSync('data/games.json', JSON.stringify(out, null, 2));
-console.log(`Passed ${MIN_RULES}/7 or more: ${out.passed.length}. Requests used: ${used}`);
+console.log(`Passed ${MIN_RULES}/${TOTAL_RULES} or more: ${out.passed.length}. Requests used: ${used}`);
