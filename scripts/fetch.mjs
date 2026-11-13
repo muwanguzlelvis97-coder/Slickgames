@@ -79,7 +79,8 @@ const ruleGoals = s => s.filter(g => g >= 2).length >= 3;                       
 const ruleOdds = o => o >= 1.2 && o <= 1.5;                                                    // R5
 const ruleTotalGoals = s => s.reduce((a, b) => a + b, 0) >= 8;                                 // R6
 
-const date = new Date().toISOString().slice(0, 10);
+// Kampala date (UTC+3) so the midnight run fetches the new day
+const date = new Date(Date.now() + 3 * 3600 * 1000).toISOString().slice(0, 10);
 const out = {
   date, generated_at: new Date().toISOString(),
   games_in_leagues: 0, candidates: 0, requests_used: 0,
