@@ -1,11 +1,76 @@
 {
-  "date": "2026-11-12",
-  "generated_at": "2026-11-12T23:19:16.213Z",
-  "games_in_leagues": 0,
+  "date": "2026-11-13",
+  "generated_at": "2026-11-13T08:49:02.051Z",
+  "games_in_leagues": 16,
   "candidates": 0,
   "requests_used": 1,
   "passed": [],
   "tickets": {},
-  "rejected": [],
+  "rejected": [
+    {
+      "game": "Czechia U18 v Poland U18",
+      "why": "no FIFA ranking file"
+    },
+    {
+      "game": "Singapore v Paraguay",
+      "why": "no FIFA ranking file"
+    },
+    {
+      "game": "Chinese Taipei v Kyrgyzstan",
+      "why": "no FIFA ranking file"
+    },
+    {
+      "game": "United Arab Emirates v Honduras",
+      "why": "no FIFA ranking file"
+    },
+    {
+      "game": "Saudi Arabia v South Korea",
+      "why": "no FIFA ranking file"
+    },
+    {
+      "game": "Qatar v Australia",
+      "why": "no FIFA ranking file"
+    },
+    {
+      "game": "Kuwait v Syria",
+      "why": "no FIFA ranking file"
+    },
+    {
+      "game": "Poland U21 v Norway U21",
+      "why": "no FIFA ranking file"
+    },
+    {
+      "game": "Germany U21 v Belgium U21",
+      "why": "no FIFA ranking file"
+    },
+    {
+      "game": "France U21 v Italy U21",
+      "why": "no FIFA ranking file"
+    },
+    {
+      "game": "Albania U21 v Luxembourg U21",
+      "why": "no FIFA ranking file"
+    },
+    {
+      "game": "Spain U21 v Japan U21",
+      "why": "no FIFA ranking file"
+    },
+    {
+      "game": "Chile U20 v Mexico U20",
+      "why": "no FIFA ranking file"
+    },
+    {
+      "game": "England U21 v Portugal U21",
+      "why": "no FIFA ranking file"
+    },
+    {
+      "game": "Argentina v Uruguay",
+      "why": "no FIFA ranking file"
+    },
+    {
+      "game": "Brazil U20 v Peru U20",
+      "why": "no FIFA ranking file"
+    }
+  ],
   "checked": []
 }
