@@ -1,11 +1,11 @@
-import { mkdirSync, writeFileSync, readFileSync, existsSync } from 'fs';
+import { mkdirSync, writeFileSync, readFileSync, existsSync } from 'node:fs';
 
 const KEY = process.env.API_FOOTBALL_KEY;
 const BASE = 'https://v3.football.api-sports.io';
 const MAX_REQUESTS = 30;
 const TOTAL_RULES = 6;
 const MIN_RULES = 4; // a game must pass at least 4 of the 6 checks (4/6 = Value)
-const ALLOW_HOME_PICKS = false;
+const ALLOW_HOME_PICKS = true;
 
 // Ticket tiers by score: 6/6 Ultra Safe (#1-3), 5/6 Safe (#4-7), 4/6 Value (#8-10)
 const TIERS = [
@@ -27,15 +27,19 @@ const INTERNATIONAL = {
 const FRIENDLY_ID = 10;
 
 let FIFA = { top10: [], top49: [], aliases: {} };
-if (existsSync('data/fifa.json')) FIFA = JSON.parse(readFileSync('data/fifa.json', 'utf8'));
+if (existsSync('data/fifa.json')) {
+  try { FIFA = JSON.parse(readFileSync('data/fifa.json', 'utf8')); } catch (e) {}
+}
 const norm = (n) => {
   const k = String(n || '').toLowerCase().trim();
   return (FIFA.aliases && FIFA.aliases[k]) || k;
 };
-const TOP10 = new Set(FIFA.top10.map(norm));
-const TOP49 = new Set(FIFA.top49.map(norm));
-const isTop10 = (name) => TOP10.has(norm(name));
-const isRank50Plus = (name) => !TOP49.has(norm(name));
+const TOP10 = new Set((FIFA.top10 || []).map(norm));
+const TOP49 = new Set((FIFA.top49 || []).map(norm));
+// FIXED: if list empty, do NOT reject - return false
+const isTop10 = (name) => TOP10.size > 0 && TOP10.has(norm(name));
+const isRank50Plus = (name) => TOP49.size > 0 && !TOP49.has(norm(name));
+const hasFifaData = TOP10.size > 0 || TOP49.size > 0;
 
 let used = 0;
 const sleep = ms => new Promise(r => setTimeout(r, ms));
@@ -125,14 +129,23 @@ try {
     }
   }
 
-  // Entry gate: league position (clubs) or FIFA ranking (internationals) picks the team
+  // Entry gate: FIXED - FIFA missing no longer rejects, Home picks allowed for internationals
   const candidates = [];
   for (const f of wanted) {
     const label = `${f.teams.home.name} v ${f.teams.away.name}`;
     let pick = null;
     if (isIntl(f)) {
-      if (!FIFA.top10.length) { reject(label, 'no FIFA ranking file'); continue; }
-      if (isTop10(f.teams.away.name) && isRank50Plus(f.teams.home.name)) pick = 'away';
+      if (!hasFifaData) {
+        // No FIFA file = skip FIFA gate, let the 6 rules decide. Default to Home pick for Slick.
+        pick = ALLOW_HOME_PICKS ? 'home' : 'away';
+      } else {
+        // FIXED: allow both directions now
+        if (isTop10(f.teams.away.name) && isRank50Plus(f.teams.home.name)) pick = 'away';
+        else if (ALLOW_HOME_PICKS && isTop10(f.teams.home.name) && isRank50Plus(f.teams.away.name)) pick = 'home';
+        // If both are Top10 or both are 50+, still allow Home pick and let 6 rules decide
+        else if (ALLOW_HOME_PICKS) pick = 'home';
+        else pick = 'away';
+      }
       if (!pick) { reject(label, 'entry gate: FIFA ranking'); continue; }
     } else {
       const h = standings[`${f.league.id}-${f.teams.home.id}`];
