@@ -3,86 +3,143 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Slick Games | Daily BetPawa Tips Uganda</title>
+<title>Slick Games | Daily BetPawa Tips for Uganda</title>
+<meta name="description" content="Daily BetPawa tips for Uganda. Every pick is scored on a 6-rule check. New picks every day at 11:00 AM.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif:wght@400;600;700&display=swap" rel="stylesheet">
 <style>
-  :root{--bg:#0b1a12;--panel:#12261b;--panel2:#17301f;--line:#25442f;--text:#eef3ec;--muted:#93ad9a;--gold:#f2c230;--good:#5fd38a}
-  *{box-sizing:border-box}
-  body{margin:0;background:var(--bg);color:var(--text);font-family:Georgia,"Times New Roman",serif;line-height:1.55}
-  header{padding:28px 20px 20px;text-align:center;border-bottom:3px solid var(--gold)}
-  h1{margin:0;font-size:2rem}
-  h1 span{color:var(--gold)}
-  header p{margin:8px auto 0;color:var(--muted);max-width:420px}
-  main{max-width:560px;margin:0 auto;padding:20px 16px 40px}
-  .tabs{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
-  .tab{background:var(--panel);border:1px solid var(--line);color:var(--text);border-radius:10px;padding:12px 6px;font:inherit;cursor:pointer;text-align:center}
-  .tab small{display:block;color:var(--muted);margin-top:2px}
-  .tab[aria-selected="true"]{background:var(--panel2);border-color:var(--gold)}
-  #box{margin-top:16px}
-  .game{background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:14px;margin-bottom:10px}
-  .lg{color:var(--muted);font-size:.85rem}
-  .teams{font-size:1.05rem;margin:4px 0 8px}
-  .row{display:flex;justify-content:space-between;gap:10px;align-items:baseline}
-  .pick{color:var(--gold)}
-  .odd{font-weight:bold;color:var(--good)}
-  .total{display:flex;justify-content:space-between;border-top:1px solid var(--line);padding-top:12px;margin-top:6px}
-  .empty{border:1px dashed var(--line);border-radius:10px;padding:22px 16px;text-align:center;color:var(--muted)}
-  h2{color:var(--gold);font-size:1.2rem;margin:32px 0 10px}
-  ol{padding-left:22px;margin:0}
-  li{margin-bottom:8px}
-  .vip{margin-top:28px;background:var(--panel);border:1px solid var(--gold);border-radius:12px;padding:20px;text-align:center}
-  .vip h2{margin-top:0}
-  .vip a{display:inline-block;background:var(--gold);color:#1a1400;text-decoration:none;font-weight:bold;padding:12px 24px;border-radius:8px;margin-top:8px}
-  footer{text-align:center;color:var(--muted);font-size:.85rem;padding:0 16px 30px}
+:root{
+  --bg:#0a1810; --panel:#12251a; --panel-2:#17301f; --line:#1f3a2b;
+  --gold:#f4c430; --text:#eaf1ec; --muted:#8fa596; --ok:#7fd69a;
+}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--bg);color:var(--text);
+  font-family:'Noto Serif',Georgia,'Times New Roman',serif;line-height:1.6;font-size:17px}
+.wrap{max-width:640px;margin:0 auto;padding:0 20px}
+header{text-align:center;padding:36px 0 26px;border-bottom:3px solid var(--gold)}
+h1{margin:0 0 10px;font-size:2.4rem;line-height:1.1;font-weight:700}
+h1 span{color:var(--gold)}
+header p{margin:0 auto;color:var(--muted);max-width:30ch}
+.tabs{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin:22px 0 16px}
+.tab{font:inherit;color:var(--text);background:var(--panel);border:1px solid var(--line);
+  border-radius:10px;padding:12px 6px;cursor:pointer;text-align:center}
+.tab small{display:block;color:var(--muted);font-size:.8rem}
+.tab[aria-selected="true"]{border-color:var(--gold);background:var(--panel-2)}
+.tab:focus-visible{outline:2px solid var(--gold);outline-offset:2px}
+.empty{border:1px dashed var(--line);border-radius:10px;padding:26px 18px;text-align:center;color:var(--muted)}
+.game{background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:16px 18px;margin-bottom:12px}
+.game .meta{color:var(--muted);font-size:.85rem;margin-bottom:4px}
+.game .teams{font-weight:600;font-size:1.1rem}
+.game .pick{margin-top:8px;display:flex;justify-content:space-between;gap:12px;align-items:baseline}
+.game .pick b{color:var(--gold)}
+.game .odd{font-weight:700;color:var(--gold);font-size:1.15rem}
+.game .score{margin-top:6px;font-size:.88rem;color:var(--ok)}
+.game .missed{color:var(--muted)}
+h2{color:var(--gold);font-size:1.45rem;margin:34px 0 12px}
+ol.rules{padding-left:1.3rem;margin:0}
+ol.rules li{margin-bottom:10px}
+.note{color:var(--muted);font-size:.92rem;margin-top:14px}
+.ranks{margin:14px 0 0;padding:0;list-style:none;color:var(--muted);font-size:.95rem}
+.ranks li{margin-bottom:4px}
+.vip{background:var(--panel);border:1px solid var(--gold);border-radius:14px;
+  padding:26px 20px;text-align:center;margin:34px 0}
+.vip h2{margin:0 0 8px}
+.vip p{margin:0 0 18px}
+.btn{display:inline-block;background:var(--gold);color:#1b1500;text-decoration:none;
+  font-weight:700;padding:13px 22px;border-radius:9px}
+.btn:focus-visible{outline:2px solid var(--text);outline-offset:3px}
+footer{text-align:center;color:var(--muted);font-size:.9rem;padding:8px 0 40px}
+@media (prefers-reduced-motion:no-preference){.game{animation:in .25s ease-out}}
+@keyframes in{from{opacity:0}to{opacity:1}}
 </style>
 </head>
 <body>
-<header>
-  <h1>Slick <span>Games</span></h1>
-  <p>Daily BetPawa tips for Uganda. New picks every day at 11:00 AM.</p>
-</header>
-<main>
-  <div class="tabs" role="tablist" id="tabs"></div>
-  <div id="box" aria-live="polite"></div>
-  <h2>Our 7-rule check</h2>
-  <ol>
+<div class="wrap">
+  <header>
+    <h1>Slick <span>Games</span></h1>
+    <p>Daily BetPawa tips for Uganda. New picks every day at 11:00 AM.</p>
+  </header>
+
+  <div class="tabs" role="tablist" aria-label="Ticket types">
+    <button class="tab" role="tab" data-key="ULTRA_SAFE" aria-selected="true">Ultra Safe<small>6 of 6 rules</small></button>
+    <button class="tab" role="tab" data-key="SAFE" aria-selected="false">Safe<small>5 of 6 rules</small></button>
+    <button class="tab" role="tab" data-key="VALUE" aria-selected="false">Value<small>4 of 6 rules</small></button>
+  </div>
+
+  <div id="picks" aria-live="polite"><div class="empty">Loading today’s picks…</div></div>
+
+  <h2>Our 6-rule check</h2>
+  <ol class="rules">
     <li>Form: won 3 of the last 5, never lost twice in a row</li>
-    <li>Home record: won 3 of the last 4 home games</li>
-    <li>Away record: won 3 of the last 4 away games, the opponent lost 2 of their last 4 at home, and the away team is top 4 with the home team bottom 6 (internationals: away top 10 in the FIFA ranking, home ranked 50 or lower)</li>
+    <li>Home or away record: the team we back won 3 of its last 4 games at that venue</li>
     <li>Head to head: won 2 of the last 3 meetings</li>
     <li>Goals: scored 2 or more in 3 of the last 5</li>
     <li>Odds: single odd between 1.20 and 1.50</li>
-    <li>Defence: scored 8 or more in the last 5 (scoring in 4 of them), conceded 5 or fewer with 2 or more clean sheets</li>
+    <li>Total goals: scored 8 or more in the last 5</li>
   </ol>
+  <ul class="ranks">
+    <li>6 of 6 rules: Ultra Safe</li>
+    <li>5 of 6 rules: Safe</li>
+    <li>4 of 6 rules: Value (it missed 2 rules)</li>
+    <li>Fewer than 4: left out</li>
+  </ul>
+  <p class="note">We back the stronger team: the away team in the top 4 against a home team in the bottom 6 (internationals: away team in the FIFA top 10, home team ranked 50 or lower).</p>
+
   <section class="vip">
     <h2>Join VIP</h2>
     <p>Get extra picks and booking codes before the match.</p>
-    <a href="https://wa.me/256748957327?text=Hello%20Slick%20Games%2C%20I%20want%20to%20join%20VIP" target="_blank" rel="noopener">Join VIP on WhatsApp</a>
+    <a class="btn" href="https://wa.me/256748957327?text=Hello%20Slick%20Games%2C%20I%20want%20to%20join%20VIP" target="_blank" rel="noopener">Join VIP on WhatsApp</a>
   </section>
-</main>
-<footer>Betting involves risk. Only play what you can afford to lose. 18+ only.</footer>
+
+  <footer>Betting involves risk. Only play what you can afford to lose. 18+ only.</footer>
+</div>
+
 <script>
-const TICKETS=[{key:'ULTRA_SAFE',name:'Ultra Safe',target:'1.50'},{key:'SAFE',name:'Safe',target:'2.00'},{key:'VALUE',name:'Value',target:'3.00'}];
-let data=null,current='ULTRA_SAFE';
-const tabs=document.getElementById('tabs');
-const box=document.getElementById('box');
-function esc(s){return String(s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));}
-function drawTabs(){
-  tabs.innerHTML=TICKETS.map(t=>`<button class="tab" role="tab" aria-selected="${t.key===current}" data-k="${t.key}">${t.name}<small>${t.target} odds</small></button>`).join('');
-  tabs.querySelectorAll('.tab').forEach(b=>b.onclick=()=>{current=b.dataset.k;drawTabs();drawBox();});
-}
-function kickoff(iso){try{return new Date(iso).toLocaleTimeString([],{hour:'2-digit',minute:'2-digit'});}catch(e){return '';}}
-function drawBox(){
-  if(!data){box.innerHTML='<div class="empty">Loading today\u2019s picks\u2026</div>';return;}
-  const t=data.tickets&&data.tickets[current];
-  if(!t||!t.games||!t.games.length){
-    box.innerHTML='<div class="empty">No games passed all 7 rules for this ticket today. New picks come at 11:00 AM.</div>';
-    return;
+(function(){
+  var RULE_NAMES = {1:'Form',2:'Home/away record',3:'Head to head',4:'Goals',5:'Odds',6:'Total goals'};
+  var data = null, current = 'ULTRA_SAFE', failed = false;
+  var box = document.getElementById('picks');
+  var tabs = document.querySelectorAll('.tab');
+
+  function esc(s){ var d=document.createElement('div'); d.textContent=String(s==null?'':s); return d.innerHTML; }
+  function kickoff(iso){
+    try { return new Date(iso).toLocaleString('en-GB',{weekday:'short',hour:'2-digit',minute:'2-digit',timeZone:'Africa/Kampala'}); }
+    catch(e){ return ''; }
   }
-  box.innerHTML=t.games.map(g=>`<div class="game"><div class="lg">${esc(g.league)} \u00b7 ${esc(kickoff(g.time))}</div><div class="teams">${esc(g.home)} v ${esc(g.away)}</div><div class="row"><span class="pick">Pick: ${esc(g.pick_team)} to win</span><span class="odd">${Number(g.odd).toFixed(2)}</span></div></div>`).join('')
-  +`<div class="total"><span>Total odds</span><strong class="odd">${Number(t.total_odds).toFixed(2)}</strong></div><div class="lg" style="margin-top:8px">Picks for ${esc(data.date)}</div>`;
-}
-drawTabs();drawBox();
-fetch('data/games.json?t='+Date.now()).then(r=>r.json()).then(j=>{data=j;drawBox();}).catch(()=>{box.innerHTML='<div class="empty">Could not load today\u2019s picks. Refresh the page.</div>';});
+  function render(){
+    if (failed){ box.innerHTML = '<div class="empty">Could not load today’s picks. Refresh the page.</div>'; return; }
+    if (!data){ return; }
+    var today = new Date().toISOString().slice(0,10);
+    var t = data.date === today && data.tickets && data.tickets[current];
+    if (!t || !t.games || !t.games.length){
+      box.innerHTML = '<div class="empty">No games passed for this ticket today. New picks come at 11:00 AM.</div>';
+      return;
+    }
+    box.innerHTML = t.games.map(function(g){
+      var missed = (g.failed_rules||[]).map(function(n){return RULE_NAMES[n]||('R'+n);}).join(', ');
+      return '<article class="game">'+
+        '<div class="meta">'+esc(g.league)+' · '+esc(kickoff(g.time))+' (Kampala time)</div>'+
+        '<div class="teams">'+esc(g.home)+' v '+esc(g.away)+'</div>'+
+        '<div class="pick"><span>Pick: <b>'+esc(g.pick_team)+' to win</b></span><span class="odd">'+esc(Number(g.odd).toFixed(2))+'</span></div>'+
+        '<div class="score">'+esc(g.score)+' of '+esc(g.total_rules||6)+' rules passed'+
+        (missed?' <span class="missed">(missed: '+esc(missed)+')</span>':'')+'</div>'+
+      '</article>';
+    }).join('');
+  }
+  tabs.forEach(function(b){
+    b.addEventListener('click', function(){
+      current = b.getAttribute('data-key');
+      tabs.forEach(function(x){ x.setAttribute('aria-selected', x===b ? 'true':'false'); });
+      render();
+    });
+  });
+  fetch('data/games.json?t='+Date.now())
+    .then(function(r){ if(!r.ok) throw new Error(r.status); return r.json(); })
+    .then(function(j){ data=j; render(); })
+    .catch(function(){ failed=true; render(); });
+})();
 </script>
 </body>
-</html>
+                                                                        </html>
