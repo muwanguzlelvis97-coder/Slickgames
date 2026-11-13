@@ -1,9 +1,9 @@
 {
   "date": "2026-11-13",
-  "generated_at": "2026-11-13T12:55:21.331Z",
+  "generated_at": "2026-11-13T13:54:45.075Z",
   "games_in_leagues": 15,
-  "candidates": 0,
-  "requests_used": 1,
+  "candidates": 15,
+  "requests_used": 30,
   "passed": [],
   "tickets": {},
   "rejected": [
@@ -70,7 +70,83 @@
     {
       "game": "Brazil U20 v Peru U20",
       "why": "no FIFA ranking file"
+    },
+    {
+      "game": "Czechia U18 v Poland U18",
+      "why": "no odds"
+    },
+    {
+      "game": "Chinese Taipei v Kyrgyzstan",
+      "why": "error {\"plan\":\"Free plans do not have access to the Last parameter.\"}"
+    },
+    {
+      "game": "United Arab Emirates v Honduras",
+      "why": "error {\"plan\":\"Free plans do not have access to the Last parameter.\"}"
+    },
+    {
+      "game": "Saudi Arabia v South Korea",
+      "why": "error {\"plan\":\"Free plans do not have access to the Last parameter.\"}"
+    },
+    {
+      "game": "Qatar v Australia",
+      "why": "error {\"plan\":\"Free plans do not have access to the Last parameter.\"}"
+    },
+    {
+      "game": "Kuwait v Syria",
+      "why": "error {\"plan\":\"Free plans do not have access to the Last parameter.\"}"
+    },
+    {
+      "game": "Poland U21 v Norway U21",
+      "why": "error {\"plan\":\"Free plans do not have access to the Last parameter.\"}"
+    },
+    {
+      "game": "Germany U21 v Belgium U21",
+      "why": "error {\"plan\":\"Free plans do not have access to the Last parameter.\"}"
+    },
+    {
+      "game": "France U21 v Italy U21",
+      "why": "error {\"plan\":\"Free plans do not have access to the Last parameter.\"}"
+    },
+    {
+      "game": "Chile U20 v Mexico U20",
+      "why": "error {\"plan\":\"Free plans do not have access to the Last parameter.\"}"
+    },
+    {
+      "game": "Albania U21 v Luxembourg U21",
+      "why": "error {\"plan\":\"Free plans do not have access to the Last parameter.\"}"
+    },
+    {
+      "game": "Spain U21 v Japan U21",
+      "why": "error {\"plan\":\"Free plans do not have access to the Last parameter.\"}"
+    },
+    {
+      "game": "England U21 v Portugal U21",
+      "why": "error {\"plan\":\"Free plans do not have access to the Last parameter.\"}"
+    },
+    {
+      "game": "Argentina v Uruguay",
+      "why": "error {\"plan\":\"Free plans do not have access to the Last parameter.\"}"
+    },
+    {
+      "game": "Brazil U20 v Peru U20",
+      "why": "error {\"plan\":\"Free plans do not have access to the Last parameter.\"}"
     }
   ],
-  "checked": []
+  "checked": [
+    1649012,
+    1647360,
+    1647636,
+    1647361,
+    1640084,
+    1649542,
+    1649543,
+    1649013,
+    1647637,
+    1649015,
+    1649014,
+    1649544,
+    1646120,
+    1647362,
+    1649545
+  ]
 }
