@@ -1,10 +1,10 @@
 {
   "date": "2026-11-14",
-  "generated_at": "2026-11-14T05:01:01.377Z",
+  "generated_at": "2026-11-14T09:25:57.713Z",
   "mode": "TRIAL (free data)",
-  "games_in_leagues": 3,
-  "candidates": 3,
-  "requests_used": 5,
+  "games_in_leagues": 0,
+  "candidates": 0,
+  "requests_used": 1,
   "passed": [
     {
       "id": 1648285,
@@ -72,9 +72,30 @@
           "h2h_wins": 2,
           "attack": 100,
           "avg_scored": 3.4
+        },
+        {
+          "id": 1648285,
+          "league": "Friendlies",
+          "home": "Palestine",
+          "away": "Iran",
+          "time": "2026-11-14T15:00:00+00:00",
+          "pick": "away",
+          "pick_team": "Iran",
+          "odd": 1.36,
+          "score": 4,
+          "total_rules": 6,
+          "failed_rules": [
+            2,
+            3
+          ],
+          "form": 60,
+          "strength": 57.8,
+          "h2h_wins": 1,
+          "attack": 79,
+          "avg_scored": 2.2
         }
       ],
-      "total_odds": 1.88
+      "total_odds": 2.56
     }
   },
   "rejected": [
