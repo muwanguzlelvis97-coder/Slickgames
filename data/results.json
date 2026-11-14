@@ -29,7 +29,7 @@
       "status": "pending"
     }
   ],
-  "updated_at": "2026-11-14T19:30:21.227Z",
+  "updated_at": "2026-11-14T20:08:04.193Z",
   "summary": {
     "overall": {
       "won": 0,
@@ -84,6 +84,7 @@
         "lost": 0
       }
     },
+    "by_league": {},
     "odds_bands": {
       "under 1.20": {
         "won": 0,
