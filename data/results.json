@@ -1,0 +1,126 @@
+{
+  "picks": [
+    {
+      "id": 1648285,
+      "kickoff": "2026-11-14T15:00:00+00:00",
+      "league": "Friendlies",
+      "home": "Palestine",
+      "away": "Iran",
+      "pick": "away",
+      "pick_team": "Iran",
+      "odd": 1.36,
+      "score": 4,
+      "tier": "VALUE",
+      "on_ticket": true,
+      "status": "pending"
+    },
+    {
+      "id": 1640086,
+      "kickoff": "2026-11-14T10:15:00+00:00",
+      "league": "Friendlies",
+      "home": "Japan",
+      "away": "Brazil",
+      "pick": "away",
+      "pick_team": "Brazil",
+      "odd": 1.88,
+      "score": 4,
+      "tier": "VALUE",
+      "on_ticket": true,
+      "status": "pending"
+    }
+  ],
+  "updated_at": "2026-11-14T19:23:34.776Z",
+  "summary": {
+    "overall": {
+      "won": 0,
+      "lost": 0,
+      "played": 0,
+      "win_rate": null,
+      "avg_odd": null,
+      "breakeven_rate": null,
+      "units": 0
+    },
+    "pending": 2,
+    "tiers": {
+      "ULTRA_SAFE": {
+        "won": 0,
+        "lost": 0,
+        "played": 0,
+        "win_rate": null,
+        "avg_odd": null,
+        "breakeven_rate": null,
+        "units": 0
+      },
+      "SAFE": {
+        "won": 0,
+        "lost": 0,
+        "played": 0,
+        "win_rate": null,
+        "avg_odd": null,
+        "breakeven_rate": null,
+        "units": 0
+      },
+      "VALUE": {
+        "won": 0,
+        "lost": 0,
+        "played": 0,
+        "win_rate": null,
+        "avg_odd": null,
+        "breakeven_rate": null,
+        "units": 0
+      }
+    },
+    "tickets": {
+      "ULTRA_SAFE": {
+        "won": 0,
+        "lost": 0
+      },
+      "SAFE": {
+        "won": 0,
+        "lost": 0
+      },
+      "VALUE": {
+        "won": 0,
+        "lost": 0
+      }
+    },
+    "odds_bands": {
+      "under 1.20": {
+        "won": 0,
+        "lost": 0,
+        "played": 0,
+        "win_rate": null,
+        "avg_odd": null,
+        "breakeven_rate": null,
+        "units": 0
+      },
+      "1.20 to 1.50": {
+        "won": 0,
+        "lost": 0,
+        "played": 0,
+        "win_rate": null,
+        "avg_odd": null,
+        "breakeven_rate": null,
+        "units": 0
+      },
+      "1.51 to 2.00": {
+        "won": 0,
+        "lost": 0,
+        "played": 0,
+        "win_rate": null,
+        "avg_odd": null,
+        "breakeven_rate": null,
+        "units": 0
+      },
+      "over 2.00": {
+        "won": 0,
+        "lost": 0,
+        "played": 0,
+        "win_rate": null,
+        "avg_odd": null,
+        "breakeven_rate": null,
+        "units": 0
+      }
+    }
+  }
+}
