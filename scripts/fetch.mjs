@@ -99,8 +99,8 @@ try {
 
   for (const f of wanted) {
     const label = `${f.teams.home.name} v ${f.teams.away.name}`;
-    if (f.league.id === FRIENDLY_ID && out.passed.length > 0) {
-      reject(label, 'friendly skipped (other games passed)');
+    if (f.league.id === FRIENDLY_ID && out.passed.some((p) => p.league !== 'Friendlies')) {
+      reject(label, 'friendly skipped (league games passed)');
       continue;
     }
     let errored = false;
