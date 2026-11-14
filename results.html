@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Slick Games | Our Results</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#0a1810;--panel:#12251a;--panel-2:#17301f;--line:#1f3a2b;--gold:#f4c430;--text:#eaf1ec;--muted:#8fa596;--ok:#7fd69a;--bad:#ff8a80}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--bg);color:var(--text);font-family:'Noto Serif',Georgia,serif;line-height:1.6;font-size:17px}
+.wrap{max-width:640px;margin:0 auto;padding:0 20px}
+header{text-align:center;padding:32px 0 22px;border-bottom:3px solid var(--gold)}
+h1{margin:0 0 8px;font-size:2.1rem;line-height:1.1}
+h1 span{color:var(--gold)}
+header p{margin:0 auto;color:var(--muted);max-width:34ch}
+a{color:var(--gold)}
+h2{color:var(--gold);font-size:1.3rem;margin:28px 0 10px}
+.big{background:var(--panel);border:1px solid var(--gold);border-radius:14px;padding:20px;text-align:center;margin-top:22px}
+.big .n{font-size:2.4rem;font-weight:700;color:var(--gold);line-height:1.1}
+.big .l{color:var(--muted);font-size:.92rem}
+table{width:100%;border-collapse:collapse;font-size:.92rem}
+th,td{padding:8px 6px;border-bottom:1px solid var(--line);text-align:left}
+th{color:var(--muted);font-weight:600;font-size:.8rem}
+td.r,th.r{text-align:right}
+.scroll{overflow-x:auto}
+.won{color:var(--ok);font-weight:700}.lost{color:var(--bad);font-weight:700}.pending,.void,.unknown{color:var(--muted)}
+.pick{background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:12px 14px;margin-bottom:10px}
+.pick .m{color:var(--muted);font-size:.8rem}
+.pick .t{font-weight:600}
+.pick .row{display:flex;justify-content:space-between;gap:10px;margin-top:4px;font-size:.92rem}
+.note{color:var(--muted);font-size:.9rem;margin-top:12px}
+.empty{border:1px dashed var(--line);border-radius:10px;padding:22px 16px;text-align:center;color:var(--muted)}
+footer{text-align:center;color:var(--muted);font-size:.9rem;padding:24px 0 40px}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <h1>Our <span>Results</span></h1>
+    <p>Every pick the bot makes is recorded and checked after the match. Nothing is deleted.</p>
+  </header>
+  <div id="out"><div class="empty">Loading results…</div></div>
+  <p class="note">Trial version. Wins count only if the team we back wins in normal time (a draw is a loss). Profit is shown for 1 unit staked on every pick, using the average odds across bookmakers, not BetPawa's own price.</p>
+  <footer><a href="./">Back to today's picks</a><br>Betting involves risk. 18+ only.</footer>
+</div>
+<script>
+(function(){
+  var out = document.getElementById('out');
+  var TIER = {ULTRA_SAFE:'Ultra Safe',SAFE:'Safe',VALUE:'Value'};
+  function esc(s){ var d=document.createElement('div'); d.textContent=String(s==null?'':s); return d.innerHTML; }
+  function pct(v){ return v==null ? '-' : v.toFixed(1)+'%'; }
+  function sign(v){ return (v>0?'+':'')+v.toFixed(2); }
+  function when(iso){
+    try { return new Date(iso).toLocaleString('en-GB',{day:'numeric',month:'short',hour:'2-digit',minute:'2-digit',timeZone:'Africa/Kampala'}); }
+    catch(e){ return ''; }
+  }
+  function render(d){
+    var s = d.summary, o = s && s.overall;
+    var html = '';
+    if (!o || !o.played){
+      html += '<div class="big"><div class="n">0 - 0</div><div class="l">No finished picks yet. '+esc(s ? s.pending : 0)+' waiting for a result.</div></div>';
+    } else {
+      html += '<div class="big"><div class="n">'+o.won+' won - '+o.lost+' lost</div>'+
+        '<div class="l">Win rate '+pct(o.win_rate)+' &middot; break-even for these odds '+pct(o.breakeven_rate)+'<br>Profit on 1 unit per pick: <b>'+sign(o.units)+'</b> units &middot; '+esc(s.pending)+' pending</div></div>';
+      html += '<h2>By ticket type (single picks)</h2><div class="scroll"><table><tr><th>Ticket</th><th class="r">Won</th><th class="r">Lost</th><th class="r">Win rate</th><th class="r">Avg odd</th></tr>';
+      ['ULTRA_SAFE','SAFE','VALUE'].forEach(function(k){
+        var t = s.tiers[k]; html += '<tr><td>'+TIER[k]+'</td><td class="r">'+t.won+'</td><td class="r">'+t.lost+'</td><td class="r">'+pct(t.win_rate)+'</td><td class="r">'+(t.avg_odd==null?'-':t.avg_odd.toFixed(2))+'</td></tr>';
+      });
+      html += '</table></div>';
+      html += '<h2>Whole tickets (every game must win)</h2><div class="scroll"><table><tr><th>Ticket</th><th class="r">Won</th><th class="r">Lost</th></tr>';
+      ['ULTRA_SAFE','SAFE','VALUE'].forEach(function(k){
+        var t = s.tickets[k]; html += '<tr><td>'+TIER[k]+'</td><td class="r">'+t.won+'</td><td class="r">'+t.lost+'</td></tr>';
+      });
+      html += '</table></div>';
+      html += '<h2>By odds range</h2><div class="scroll"><table><tr><th>Odds</th><th class="r">Played</th><th class="r">Win rate</th><th class="r">Break-even</th></tr>';
+      Object.keys(s.odds_bands).forEach(function(k){
+        var b = s.odds_bands[k];
+        html += '<tr><td>'+esc(k)+'</td><td class="r">'+b.played+'</td><td class="r">'+pct(b.win_rate)+'</td><td class="r">'+pct(b.breakeven_rate)+'</td></tr>';
+      });
+      html += '</table></div><p class="note">A range is only worth using when its win rate stays above its break-even over many picks.</p>';
+    }
+    var picks = (d.picks || []).slice().sort(function(a,b){ return Date.parse(b.kickoff) - Date.parse(a.kickoff); }).slice(0, 40);
+    html += '<h2>Recent picks</h2>';
+    if (!picks.length){ html += '<div class="empty">No picks recorded yet.</div>'; }
+    picks.forEach(function(p){
+      var label = p.status === 'won' ? 'WON' : p.status === 'lost' ? 'LOST' : p.status === 'void' ? 'VOID' : p.status === 'unknown' ? 'NO RESULT' : 'PENDING';
+      html += '<div class="pick"><div class="m">'+esc(p.league)+' &middot; '+esc(when(p.kickoff))+' (Kampala) &middot; '+esc(TIER[p.tier]||'')+'</div>'+
+        '<div class="t">'+esc(p.home)+' v '+esc(p.away)+(p.final?' &nbsp;<span class="m">('+esc(p.final)+')</span>':'')+'</div>'+
+        '<div class="row"><span>Pick: <b>'+esc(p.pick_team)+'</b> @ '+esc(Number(p.odd).toFixed(2))+'</span><span class="'+esc(p.status)+'">'+label+'</span></div></div>';
+    });
+    out.innerHTML = html;
+  }
+  fetch('data/results.json?t='+Date.now())
+    .then(function(r){ if(!r.ok) throw new Error(r.status); return r.json(); })
+    .then(render)
+    .catch(function(){ out.innerHTML = '<div class="empty">No results recorded yet. They appear after the next bot run.</div>'; });
+})();
+</script>
+</body>
+  </html>
