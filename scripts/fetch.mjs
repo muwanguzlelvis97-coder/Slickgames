@@ -18,12 +18,35 @@ const TIERS = [
   { key: 'VALUE', score: 4, max: 3 }
 ];
 
+// League allowlist: id -> [country as the API writes it (lowercase letters only), name, priority]
+// Priority 1 = strongest leagues (checked first), 2 = next, 3 = smaller leagues.
+// The country check stops a wrong league id from letting in the wrong league.
 const LEAGUES = {
-  39: 'England Premier League', 40: 'England Championship', 78: 'Germany Bundesliga',
-  88: 'Netherlands Eredivisie', 94: 'Portugal Primeira Liga', 144: 'Belgium Pro League', 253: 'USA MLS'
+  39: ['england', 'England Premier League', 1], 140: ['spain', 'Spain La Liga', 1],
+  135: ['italy', 'Italy Serie A', 1], 78: ['germany', 'Germany Bundesliga', 1],
+  61: ['france', 'France Ligue 1', 1], 2: ['world', 'UEFA Champions League', 1],
+  3: ['world', 'UEFA Europa League', 1], 848: ['world', 'UEFA Conference League', 2],
+  40: ['england', 'England Championship', 2], 88: ['netherlands', 'Netherlands Eredivisie', 2],
+  94: ['portugal', 'Portugal Primeira Liga', 2], 144: ['belgium', 'Belgium Pro League', 2],
+  203: ['turkey', 'Turkey Super Lig', 2], 179: ['scotland', 'Scotland Premiership', 2],
+  71: ['brazil', 'Brazil Serie A', 2], 128: ['argentina', 'Argentina Liga Profesional', 2],
+  253: ['usa', 'USA MLS', 2], 262: ['mexico', 'Mexico Liga MX', 2],
+  307: ['saudiarabia', 'Saudi Pro League', 2], 98: ['japan', 'Japan J1 League', 2],
+  13: ['world', 'Copa Libertadores', 2], 11: ['world', 'Copa Sudamericana', 3],
+  79: ['germany', 'Germany 2. Bundesliga', 3], 136: ['italy', 'Italy Serie B', 3],
+  141: ['spain', 'Spain Segunda Division', 3], 292: ['southkorea', 'South Korea K League 1', 3],
+  169: ['china', 'China Super League', 3], 188: ['australia', 'Australia A-League', 3],
+  218: ['austria', 'Austria Bundesliga', 3], 207: ['switzerland', 'Switzerland Super League', 3],
+  197: ['greece', 'Greece Super League', 3], 119: ['denmark', 'Denmark Superliga', 3],
+  103: ['norway', 'Norway Eliteserien', 3], 113: ['sweden', 'Sweden Allsvenskan', 3],
+  106: ['poland', 'Poland Ekstraklasa', 3], 345: ['czechrepublic', 'Czech Liga', 3],
+  235: ['russia', 'Russia Premier League', 3], 333: ['ukraine', 'Ukraine Premier League', 3]
 };
+const cleanCountry = (c) => String(c || '').toLowerCase().replace(/[^a-z]/g, '');
 const INTERNATIONAL = {
-  1: 'World Cup', 4: 'Euros', 32: 'WC Qualifiers Europe', 34: 'WC Qualifiers South America',
+  1: 'World Cup', 4: 'Euros', 9: 'Copa America', 5: 'UEFA Nations League',
+  6: 'Africa Cup of Nations', 7: 'Asian Cup', 22: 'CONCACAF Gold Cup',
+  32: 'WC Qualifiers Europe', 34: 'WC Qualifiers South America',
   29: 'WC Qualifiers Africa', 30: 'WC Qualifiers Asia', 31: 'WC Qualifiers CONCACAF',
   33: 'WC Qualifiers Oceania', 37: 'WC Intercontinental Playoffs', 960: 'Euro Qualifiers',
   10: 'International Friendlies'
@@ -88,14 +111,21 @@ if (sameDay) {
 try {
   const fixtures = await api(`/fixtures?date=${date}`);
   const isIntl = (f) => INTERNATIONAL[f.league.id] !== undefined;
+  const isClub = (f) => !!LEAGUES[f.league.id] && cleanCountry(f.league.country) === LEAGUES[f.league.id][0];
+  // allowlisted league id but unexpected country name: report it instead of silently skipping
+  out.league_warnings = [...new Set(fixtures
+    .filter((f) => LEAGUES[f.league.id] && !isClub(f))
+    .map((f) => `${f.league.id} ${f.league.name} (${f.league.country})`))];
   let wanted = fixtures.filter((f) =>
-    (LEAGUES[f.league.id] || isIntl(f)) && f.fixture.status.short === 'NS' && !checked.has(f.fixture.id) &&
+    (isClub(f) || isIntl(f)) && f.fixture.status.short === 'NS' && !checked.has(f.fixture.id) &&
     !isYouthName(f.teams.home.name) && !isYouthName(f.teams.away.name));
-  // club leagues first, friendlies last
-  wanted.sort((x, y) => (x.league.id === FRIENDLY_ID ? 1 : 0) - (y.league.id === FRIENDLY_ID ? 1 : 0));
+  // best leagues first, friendlies last; same priority: earliest kick-off first
+  const prio = (f) => (f.league.id === FRIENDLY_ID ? 9 : isIntl(f) ? 2 : LEAGUES[f.league.id][2]);
+  wanted.sort((x, y) => prio(x) - prio(y) || Date.parse(x.fixture.date) - Date.parse(y.fixture.date));
   out.games_in_leagues = wanted.length;
   out.candidates = wanted.length;
-  console.log('Leagues found today:', [...new Set(wanted.map((f) => `${f.league.id} ${f.league.name} (${f.league.country})`))]);
+  out.leagues_today = [...new Set(wanted.map((f) => `${f.league.id} ${f.league.name} (${f.league.country})`))];
+  console.log('Leagues found today:', out.leagues_today);
 
   for (const f of wanted) {
     const label = `${f.teams.home.name} v ${f.teams.away.name}`;
@@ -159,7 +189,7 @@ try {
       }
 
       out.passed.push({
-        id: f.fixture.id, league: f.league.name,
+        id: f.fixture.id, league: f.league.name, league_id: f.league.id, country: f.league.country,
         home: f.teams.home.name, away: f.teams.away.name,
         time: f.fixture.date, pick, pick_team: me.name, odd,
         score, total_rules: TOTAL_RULES, failed_rules: failed,
