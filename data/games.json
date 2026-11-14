@@ -1,1 +1,81 @@
-{"date":"","games_in_leagues":0,"candidates":0,"requests_used":0,"passed":[],"tickets":{},"rejected":[],"checked":[]}
+{
+  "date": "2026-11-14",
+  "generated_at": "2026-11-14T04:52:18.392Z",
+  "mode": "TRIAL (free data)",
+  "games_in_leagues": 5,
+  "candidates": 5,
+  "requests_used": 4,
+  "passed": [
+    {
+      "id": 1640086,
+      "league": "Friendlies",
+      "home": "Japan",
+      "away": "Brazil",
+      "time": "2026-11-14T10:15:00+00:00",
+      "pick": "away",
+      "pick_team": "Brazil",
+      "odd": 1.88,
+      "score": 4,
+      "total_rules": 6,
+      "failed_rules": [
+        2,
+        5
+      ],
+      "form": 87,
+      "strength": 57.7,
+      "h2h_wins": 2,
+      "attack": 100,
+      "avg_scored": 3.4
+    }
+  ],
+  "tickets": {
+    "VALUE": {
+      "games": [
+        {
+          "id": 1640086,
+          "league": "Friendlies",
+          "home": "Japan",
+          "away": "Brazil",
+          "time": "2026-11-14T10:15:00+00:00",
+          "pick": "away",
+          "pick_team": "Brazil",
+          "odd": 1.88,
+          "score": 4,
+          "total_rules": 6,
+          "failed_rules": [
+            2,
+            5
+          ],
+          "form": 87,
+          "strength": 57.7,
+          "h2h_wins": 2,
+          "attack": 100,
+          "avg_scored": 3.4
+        }
+      ],
+      "total_odds": 1.88
+    }
+  },
+  "rejected": [
+    {
+      "game": "Bahrain v Yemen",
+      "why": "not enough recent games"
+    },
+    {
+      "game": "China v Malaysia",
+      "why": "friendly skipped (other games passed)"
+    },
+    {
+      "game": "Palestine v Iran",
+      "why": "friendly skipped (other games passed)"
+    },
+    {
+      "game": "Basque Country v Venezuela",
+      "why": "friendly skipped (other games passed)"
+    }
+  ],
+  "checked": [
+    1647638,
+    1640086
+  ]
+}
