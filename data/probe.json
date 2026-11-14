@@ -1,0 +1,208 @@
+{
+  "date": "2026-11-14",
+  "generated_at": "2026-11-14T04:38:16.542Z",
+  "requests_used": 7,
+  "tests": [
+    {
+      "test": "fixtures of the day",
+      "ok": true,
+      "games_found": 1052
+    },
+    {
+      "game": "Dakota v Caiquetio",
+      "test": "predictions",
+      "ok": true,
+      "error": null,
+      "sample": {
+        "advice": "Combo Winner : Dakota and +2.5 goals",
+        "comparison": {
+          "form": {
+            "home": "64%",
+            "away": "36%"
+          },
+          "att": {
+            "home": "58%",
+            "away": "42%"
+          },
+          "def": {
+            "home": "64%",
+            "away": "36%"
+          },
+          "poisson_distribution": {
+            "home": "82%",
+            "away": "18%"
+          },
+          "h2h": {
+            "home": "100%",
+            "away": "0%"
+          },
+          "goals": {
+            "home": "94%",
+            "away": "6%"
+          },
+          "total": {
+            "home": "72.4%",
+            "away": "27.6%"
+          }
+        },
+        "home_last5": {
+          "played": 3,
+          "form": "78%",
+          "att": "41%",
+          "def": "85%",
+          "goals": {
+            "for": {
+              "total": 11,
+              "average": "3.7"
+            },
+            "against": {
+              "total": 4,
+              "average": "1.3"
+            }
+          }
+        },
+        "away_last5": {
+          "played": 3,
+          "form": "44%",
+          "att": "30%",
+          "def": "74%",
+          "goals": {
+            "for": {
+              "total": 8,
+              "average": "2.7"
+            },
+            "against": {
+              "total": 7,
+              "average": "2.3"
+            }
+          }
+        },
+        "h2h_count": 7,
+        "h2h_latest": [
+          "2023-11-12",
+          "2019-02-27",
+          "2018-11-04"
+        ]
+      }
+    },
+    {
+      "game": "Dakota v Caiquetio",
+      "test": "head to head",
+      "ok": true,
+      "error": null,
+      "sample": {
+        "matches": 8,
+        "newest": [
+          "2026-11-14",
+          "2023-11-12",
+          "2019-02-27"
+        ]
+      }
+    },
+    {
+      "game": "Dakota v Caiquetio",
+      "test": "team statistics",
+      "ok": false,
+      "error": "{\"plan\":\"Free plans do not have access to this season, try from 2022 to 2024.\"}",
+      "sample": null
+    },
+    {
+      "game": "Melbourne City W v Newcastle Jets FC W",
+      "test": "predictions",
+      "ok": true,
+      "error": null,
+      "sample": {
+        "advice": "Winner : Melbourne City W",
+        "comparison": {
+          "form": {
+            "home": "86%",
+            "away": "14%"
+          },
+          "att": {
+            "home": "88%",
+            "away": "13%"
+          },
+          "def": {
+            "home": "75%",
+            "away": "25%"
+          },
+          "poisson_distribution": {
+            "home": "0%",
+            "away": "0%"
+          },
+          "h2h": {
+            "home": "80%",
+            "away": "20%"
+          },
+          "goals": {
+            "home": "71%",
+            "away": "29%"
+          },
+          "total": {
+            "home": "80.0%",
+            "away": "20.2%"
+          }
+        },
+        "home_last5": {
+          "played": 2,
+          "form": "100%",
+          "att": "78%",
+          "def": "89%",
+          "goals": {
+            "for": {
+              "total": 7,
+              "average": "3.5"
+            },
+            "against": {
+              "total": 1,
+              "average": "0.5"
+            }
+          }
+        },
+        "away_last5": {
+          "played": 3,
+          "form": "11%",
+          "att": "11%",
+          "def": "67%",
+          "goals": {
+            "for": {
+              "total": 1,
+              "average": "0.3"
+            },
+            "against": {
+              "total": 3,
+              "average": "1.0"
+            }
+          }
+        },
+        "h2h_count": 10,
+        "h2h_latest": [
+          "2026-04-05",
+          "2026-01-16",
+          "2025-04-11"
+        ]
+      }
+    },
+    {
+      "game": "Melbourne City W v Newcastle Jets FC W",
+      "test": "head to head",
+      "ok": true,
+      "error": null,
+      "sample": {
+        "matches": 22,
+        "newest": [
+          "2027-01-10",
+          "2026-11-14",
+          "2026-04-05"
+        ]
+      }
+    },
+    {
+      "game": "Melbourne City W v Newcastle Jets FC W",
+      "test": "team statistics",
+      "ok": false,
+      "error": "{\"plan\":\"Free plans do not have access to this season, try from 2022 to 2024.\"}",
+      "sample": null
+    }
+  ]
+}
