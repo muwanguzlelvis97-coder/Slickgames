@@ -1,11 +1,32 @@
 {
   "date": "2026-11-14",
-  "generated_at": "2026-11-14T04:52:18.392Z",
+  "generated_at": "2026-11-14T05:01:01.377Z",
   "mode": "TRIAL (free data)",
-  "games_in_leagues": 5,
-  "candidates": 5,
-  "requests_used": 4,
+  "games_in_leagues": 3,
+  "candidates": 3,
+  "requests_used": 5,
   "passed": [
+    {
+      "id": 1648285,
+      "league": "Friendlies",
+      "home": "Palestine",
+      "away": "Iran",
+      "time": "2026-11-14T15:00:00+00:00",
+      "pick": "away",
+      "pick_team": "Iran",
+      "odd": 1.36,
+      "score": 4,
+      "total_rules": 6,
+      "failed_rules": [
+        2,
+        3
+      ],
+      "form": 60,
+      "strength": 57.8,
+      "h2h_wins": 1,
+      "attack": 79,
+      "avg_scored": 2.2
+    },
     {
       "id": 1640086,
       "league": "Friendlies",
@@ -72,10 +93,21 @@
     {
       "game": "Basque Country v Venezuela",
       "why": "friendly skipped (other games passed)"
+    },
+    {
+      "game": "China v Malaysia",
+      "why": "only 0 of 5 non-odds checks (failed R1, R2, R3, R4, R6)"
+    },
+    {
+      "game": "Basque Country v Venezuela",
+      "why": "not enough recent games"
     }
   ],
   "checked": [
     1647638,
-    1640086
+    1640086,
+    1647365,
+    1648285,
+    1647641
   ]
 }
