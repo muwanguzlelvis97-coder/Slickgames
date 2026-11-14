@@ -23,7 +23,7 @@ let added = 0;
 for (const g of games.passed || []) {
   if (have.has(g.id)) continue;
   results.picks.push({
-    id: g.id, kickoff: g.time, league: g.league, home: g.home, away: g.away,
+    id: g.id, kickoff: g.time, league: g.league, league_id: g.league_id, country: g.country, home: g.home, away: g.away,
     pick: g.pick, pick_team: g.pick_team, odd: g.odd, score: g.score,
     tier: tierOf(g.score), on_ticket: onTicket.has(g.id), status: 'pending'
   });
@@ -81,6 +81,12 @@ const stats = (list) => {
 const band = (o) => (o < 1.2 ? 'under 1.20' : o <= 1.5 ? '1.20 to 1.50' : o <= 2.0 ? '1.51 to 2.00' : 'over 2.00');
 const bands = {};
 for (const p of settled) (bands[band(p.odd)] = bands[band(p.odd)] || []).push(p);
+const byLeague = {};
+for (const p of settled) {
+  const k = p.league + (p.country ? ' (' + p.country + ')' : '');
+  (byLeague[k] = byLeague[k] || []).push(p);
+}
+const by_league = Object.fromEntries(Object.entries(byLeague).map(([k, v]) => [k, stats(v)]));
 const tiers = {};
 for (const t of ['ULTRA_SAFE', 'SAFE', 'VALUE']) tiers[t] = stats(settled.filter((p) => p.tier === t));
 
@@ -103,6 +109,7 @@ results.summary = {
   pending: results.picks.filter((p) => p.status === 'pending').length,
   tiers,
   tickets: ticketStats,
+  by_league,
   odds_bands: Object.fromEntries(['under 1.20', '1.20 to 1.50', '1.51 to 2.00', 'over 2.00'].map((b) => [b, stats(bands[b] || [])]))
 };
 
