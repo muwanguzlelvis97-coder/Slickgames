@@ -82,6 +82,15 @@ footer{text-align:center;color:var(--muted);font-size:.9rem;padding:24px 0 40px}
         html += '<tr><td>'+esc(k)+'</td><td class="r">'+b.played+'</td><td class="r">'+pct(b.win_rate)+'</td><td class="r">'+pct(b.breakeven_rate)+'</td></tr>';
       });
       html += '</table></div><p class="note">A range is only worth using when its win rate stays above its break-even over many picks.</p>';
+      var leagues = Object.keys(s.by_league || {}).map(function(k){ return [k, s.by_league[k]]; })
+        .sort(function(a,b){ return b[1].played - a[1].played; }).slice(0, 15);
+      if (leagues.length){
+        html += '<h2>By league</h2><div class="scroll"><table><tr><th>League</th><th class="r">Played</th><th class="r">Win rate</th><th class="r">Profit</th></tr>';
+        leagues.forEach(function(e){
+          html += '<tr><td>'+esc(e[0])+'</td><td class="r">'+e[1].played+'</td><td class="r">'+pct(e[1].win_rate)+'</td><td class="r">'+sign(e[1].units)+'</td></tr>';
+        });
+        html += '</table></div><p class="note">Small numbers prove nothing. Judge a league only after 20 or more picks.</p>';
+      }
     }
     var picks = (d.picks || []).slice().sort(function(a,b){ return Date.parse(b.kickoff) - Date.parse(a.kickoff); }).slice(0, 40);
     html += '<h2>Recent picks</h2>';
@@ -101,4 +110,4 @@ footer{text-align:center;color:var(--muted);font-size:.9rem;padding:24px 0 40px}
 })();
 </script>
 </body>
-  </html>
+                                                     </html>
