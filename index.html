@@ -29,6 +29,9 @@ header p{margin:0 auto;color:var(--muted);max-width:30ch}
 .tab[aria-selected="true"]{border-color:var(--gold);background:var(--panel-2)}
 .tab:focus-visible{outline:2px solid var(--gold);outline-offset:2px}
 .empty{border:1px dashed var(--line);border-radius:10px;padding:26px 18px;text-align:center;color:var(--muted)}
+.total{margin:0 0 12px;color:var(--muted)}
+.total b{color:var(--gold);font-size:1.15rem}
+.tab .n{color:var(--gold)}
 .game{background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:16px 18px;margin-bottom:12px}
 .game .meta{color:var(--muted);font-size:.85rem;margin-bottom:4px}
 .game .teams{font-weight:600;font-size:1.1rem}
@@ -63,9 +66,9 @@ footer{text-align:center;color:var(--muted);font-size:.9rem;padding:8px 0 40px}
   </header>
 
   <div class="tabs" role="tablist" aria-label="Ticket types">
-    <button class="tab" role="tab" data-key="ULTRA_SAFE" aria-selected="true">Ultra Safe<small>6 of 6 rules</small></button>
-    <button class="tab" role="tab" data-key="SAFE" aria-selected="false">Safe<small>5 of 6 rules</small></button>
-    <button class="tab" role="tab" data-key="VALUE" aria-selected="false">Value<small>4 of 6 rules</small></button>
+    <button class="tab" role="tab" data-key="ULTRA_SAFE" aria-selected="true">Ultra Safe<span class="n"></span><small>6 of 6 rules</small></button>
+    <button class="tab" role="tab" data-key="SAFE" aria-selected="false">Safe<span class="n"></span><small>5 of 6 rules</small></button>
+    <button class="tab" role="tab" data-key="VALUE" aria-selected="false">Value<span class="n"></span><small>4 of 6 rules</small></button>
   </div>
 
   <div id="picks" aria-live="polite"><div class="empty">Loading today’s picks…</div></div>
@@ -85,7 +88,8 @@ footer{text-align:center;color:var(--muted);font-size:.9rem;padding:8px 0 40px}
     <li>4 of 6 rules: Value (it missed 2 rules)</li>
     <li>Fewer than 4: left out</li>
   </ul>
-  <p class="note">We back the stronger team: the away team in the top 4 against a home team in the bottom 6 (internationals: away team in the FIFA top 10, home team ranked 50 or lower).</p>
+  <p class="note">We back the team our data rates stronger for the match, using recent form, attack, goals and head to head.</p>
+  <p class="note">Trial version: while we test, rules 1, 2, 4 and 6 use recent form and goal averages instead of exact match counts.</p>
 
   <section class="vip">
     <h2>Join VIP</h2>
@@ -117,7 +121,9 @@ footer{text-align:center;color:var(--muted);font-size:.9rem;padding:8px 0 40px}
       box.innerHTML = '<div class="empty">No games passed for this ticket today. New picks come at midnight and midday.</div>';
       return;
     }
-    box.innerHTML = t.games.map(function(g){
+    var totalLine = (t.games.length > 1 && isFinite(Number(t.total_odds)))
+      ? '<div class="total">Total odds: <b>'+esc(Number(t.total_odds).toFixed(2))+'</b></div>' : '';
+    box.innerHTML = totalLine + t.games.map(function(g){
       var missed = (g.failed_rules||[]).map(function(n){return RULE_NAMES[n]||('R'+n);}).join(', ');
       return '<article class="game">'+
         '<div class="meta">'+esc(g.league)+' · '+esc(kickoff(g.time))+' (Kampala time)</div>'+
@@ -137,9 +143,28 @@ footer{text-align:center;color:var(--muted);font-size:.9rem;padding:8px 0 40px}
   });
   fetch('data/games.json?t='+Date.now())
     .then(function(r){ if(!r.ok) throw new Error(r.status); return r.json(); })
-    .then(function(j){ data=j; render(); })
+    .then(function(j){
+      data = j;
+      var today = new Date(Date.now() + 3 * 3600 * 1000).toISOString().slice(0,10);
+      var order = ['ULTRA_SAFE','SAFE','VALUE'];
+      if (data.date === today && data.tickets){
+        for (var i=0;i<order.length;i++){
+          var tk = data.tickets[order[i]];
+          if (tk && tk.games && tk.games.length){ current = order[i]; break; }
+        }
+      }
+      tabs.forEach(function(x){
+        var k = x.getAttribute('data-key');
+        var tt = data.date === today && data.tickets && data.tickets[k];
+        var c = tt && tt.games ? tt.games.length : 0;
+        var n = x.querySelector('.n');
+        if (n) n.textContent = c ? ' (' + c + ')' : '';
+        x.setAttribute('aria-selected', k===current ? 'true':'false');
+      });
+      render();
+    })
     .catch(function(){ failed=true; render(); });
 })();
 </script>
 </body>
-</html>
+    </html>
