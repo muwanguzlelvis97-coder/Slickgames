@@ -1,5 +1,9 @@
 import { mkdirSync, writeFileSync, readFileSync, existsSync } from 'node:fs';
 
+// TRIAL VERSION - works on the FREE API-Football plan.
+// Uses the /predictions endpoint (recent form, attack, goals, head-to-head) + /odds.
+// Rules 1, 2, 4 and 6 are approximations of the full system (free plan has no match-by-match history).
+
 const KEY = process.env.API_FOOTBALL_KEY;
 const BASE = 'https://v3.football.api-sports.io';
 const MAX_REQUESTS = 30;
@@ -26,28 +30,13 @@ const INTERNATIONAL = {
 };
 const FRIENDLY_ID = 10;
 
-let FIFA = { top10: [], top49: [], aliases: {} };
-if (existsSync('data/fifa.json')) {
-  try { FIFA = JSON.parse(readFileSync('data/fifa.json', 'utf8')); } catch (e) {}
-}
-const norm = (n) => {
-  const k = String(n || '').toLowerCase().trim();
-  return (FIFA.aliases && FIFA.aliases[k]) || k;
-};
-const TOP10 = new Set((FIFA.top10 || []).map(norm));
-const TOP49 = new Set((FIFA.top49 || []).map(norm));
-// FIXED: if list empty, do NOT reject - return false
-const isTop10 = (name) => TOP10.size > 0 && TOP10.has(norm(name));
-const isRank50Plus = (name) => TOP49.size > 0 && !TOP49.has(norm(name));
-const hasFifaData = TOP10.size > 0 || TOP49.size > 0;
-
 // Youth (U15-U23) and women's teams are not allowed
 const isYouthName = (n) =>
   /\bU-?(15|16|17|18|19|20|21|23)\b/i.test(n) || /\bwomen\b/i.test(n) || /\sW$/.test(n);
 
 let used = 0;
-const sleep = ms => new Promise(r => setTimeout(r, ms));
-const count = (a, x) => a.filter(v => v === x).length;
+const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
+const pct = (s) => parseFloat(String(s == null ? '' : s).replace('%', '')) || 0;
 
 async function api(path) {
   if (used >= MAX_REQUESTS) throw new Error('LIMIT');
@@ -59,48 +48,28 @@ async function api(path) {
   return data.response;
 }
 
-function summarize(fixtures, teamId) {
-  const done = fixtures
-    .filter(f => ['FT', 'AET', 'PEN'].includes(f.fixture.status.short) && f.goals.home !== null)
-    .sort((a, b) => b.fixture.timestamp - a.fixture.timestamp)
-    .map(f => {
-      const home = f.teams.home.id === teamId;
-      const gf = home ? f.goals.home : f.goals.away;
-      const ga = home ? f.goals.away : f.goals.home;
-      return { home, gf, ga, res: gf > ga ? 'W' : gf < ga ? 'L' : 'D' };
-    });
-  const last5 = done.slice(0, 5);
-  return {
-    results: last5.map(x => x.res),
-    scored: last5.map(x => x.gf),
-    conceded: last5.map(x => x.ga),
-    home4: done.filter(x => x.home).slice(0, 4).map(x => x.res),
-    away4: done.filter(x => !x.home).slice(0, 4).map(x => x.res)
-  };
+// wins for the picked team in the last 3 finished head-to-head games
+function h2hWins(list, teamId) {
+  const done = (list || [])
+    .filter((m) => m.goals && m.goals.home !== null && m.goals.away !== null)
+    .sort((a, b) => new Date(b.fixture.date) - new Date(a.fixture.date))
+    .slice(0, 3);
+  return done.filter((m) => {
+    const home = m.teams.home.id === teamId;
+    const gf = home ? m.goals.home : m.goals.away;
+    const ga = home ? m.goals.away : m.goals.home;
+    return gf > ga;
+  }).length;
 }
-
-// The 6 checks
-const ruleForm = r => count(r, 'W') >= 3 && !r.some((v, i) => v === 'L' && r[i + 1] === 'L'); // R1
-const ruleVenue = (res) => count(res, 'W') >= 3;                                               // R2 (home or away, by pick)
-const ruleH2H = h => count(h, 'W') >= 2;                                                       // R3
-const ruleGoals = s => s.filter(g => g >= 2).length >= 3;                                      // R4
-const ruleOdds = o => o >= 1.2 && o <= 1.5;                                                    // R5
-const ruleTotalGoals = s => s.reduce((a, b) => a + b, 0) >= 8;                                 // R6
 
 // Kampala date (UTC+3) so the midnight run fetches the new day
 const date = new Date(Date.now() + 3 * 3600 * 1000).toISOString().slice(0, 10);
 const out = {
-  date, generated_at: new Date().toISOString(),
+  date, generated_at: new Date().toISOString(), mode: 'TRIAL (free data)',
   games_in_leagues: 0, candidates: 0, requests_used: 0,
   passed: [], tickets: {}, rejected: []
 };
 const reject = (game, why) => out.rejected.push({ game, why });
-
-// Free API plan has no "last" parameter, so we use a date range (past 400 days) instead
-const DAY = 86400000;
-const ymd = (ms) => new Date(ms).toISOString().slice(0, 10);
-const RANGE_FROM = ymd(Date.parse(date + 'T00:00:00Z') - 400 * DAY);
-const RANGE_TO = ymd(Date.parse(date + 'T00:00:00Z') - DAY);
 
 // Keep earlier picks from the same day and remember which games were checked
 let prev = null;
@@ -118,63 +87,17 @@ if (sameDay) {
 
 try {
   const fixtures = await api(`/fixtures?date=${date}`);
-  const isIntl = f => INTERNATIONAL[f.league.id] !== undefined;
-  const wanted = fixtures.filter(f =>
+  const isIntl = (f) => INTERNATIONAL[f.league.id] !== undefined;
+  let wanted = fixtures.filter((f) =>
     (LEAGUES[f.league.id] || isIntl(f)) && f.fixture.status.short === 'NS' && !checked.has(f.fixture.id) &&
     !isYouthName(f.teams.home.name) && !isYouthName(f.teams.away.name));
+  // club leagues first, friendlies last
+  wanted.sort((x, y) => (x.league.id === FRIENDLY_ID ? 1 : 0) - (y.league.id === FRIENDLY_ID ? 1 : 0));
   out.games_in_leagues = wanted.length;
-  console.log('Leagues found today:', [...new Set(wanted.map(f => `${f.league.id} ${f.league.name} (${f.league.country})`))]);
+  out.candidates = wanted.length;
+  console.log('Leagues found today:', [...new Set(wanted.map((f) => `${f.league.id} ${f.league.name} (${f.league.country})`))]);
 
-  const standings = {};
-  const clubWanted = wanted.filter(f => !isIntl(f));
-  for (const lid of new Set(clubWanted.map(f => f.league.id))) {
-    const season = clubWanted.find(f => f.league.id === lid).league.season;
-    try {
-      const r = await api(`/standings?league=${lid}&season=${season}`);
-      for (const g of (r[0]?.league.standings || [])) {
-        for (const t of g) standings[`${lid}-${t.team.id}`] = { rank: t.rank, n: g.length };
-      }
-    } catch (e) {
-      if (e.message === 'LIMIT') break;
-      console.log('standings failed', lid, e.message);
-    }
-  }
-
-  // Entry gate: FIXED - FIFA missing no longer rejects, Home picks allowed for internationals
-  const candidates = [];
   for (const f of wanted) {
-    const label = `${f.teams.home.name} v ${f.teams.away.name}`;
-    let pick = null;
-    if (isIntl(f)) {
-      if (!hasFifaData) {
-        // No FIFA file = skip FIFA gate, let the 6 rules decide. Default to Home pick for Slick.
-        pick = ALLOW_HOME_PICKS ? 'home' : 'away';
-      } else {
-        // FIXED: allow both directions now
-        if (isTop10(f.teams.away.name) && isRank50Plus(f.teams.home.name)) pick = 'away';
-        else if (ALLOW_HOME_PICKS && isTop10(f.teams.home.name) && isRank50Plus(f.teams.away.name)) pick = 'home';
-        // If both are Top10 or both are 50+, still allow Home pick and let 6 rules decide
-        else if (ALLOW_HOME_PICKS) pick = 'home';
-        else pick = 'away';
-      }
-      if (!pick) { reject(label, 'entry gate: FIFA ranking'); continue; }
-    } else {
-      const h = standings[`${f.league.id}-${f.teams.home.id}`];
-      const a = standings[`${f.league.id}-${f.teams.away.id}`];
-      if (!h || !a) { reject(label, 'no standings'); continue; }
-      const bottom6 = x => x.rank >= x.n - 5;
-      if (a.rank <= 4 && bottom6(h)) pick = 'away';
-      else if (ALLOW_HOME_PICKS && h.rank <= 4 && bottom6(a)) pick = 'home';
-      if (!pick) { reject(label, 'entry gate: league positions'); continue; }
-    }
-    candidates.push({ f, pick });
-  }
-  out.candidates = candidates.length;
-
-  candidates.sort((x, y) =>
-    (x.f.league.id === FRIENDLY_ID ? 1 : 0) - (y.f.league.id === FRIENDLY_ID ? 1 : 0));
-
-  for (const { f, pick } of candidates) {
     const label = `${f.teams.home.name} v ${f.teams.away.name}`;
     if (f.league.id === FRIENDLY_ID && out.passed.length > 0) {
       reject(label, 'friendly skipped (other games passed)');
@@ -182,42 +105,53 @@ try {
     }
     let errored = false;
     try {
-      const me = pick === 'away' ? f.teams.away : f.teams.home;
-      const opp = pick === 'away' ? f.teams.home : f.teams.away;
+      const preds = await api(`/predictions?fixture=${f.fixture.id}`);
+      const pr = preds && preds[0];
+      if (!pr || !pr.comparison || !pr.teams) { reject(label, 'no prediction data'); continue; }
 
+      // Pick the favourite by the API's overall comparison
+      const homeTotal = pct(pr.comparison.total && pr.comparison.total.home);
+      const awayTotal = pct(pr.comparison.total && pr.comparison.total.away);
+      const pick = homeTotal >= awayTotal ? 'home' : 'away';
+      if (pick === 'home' && !ALLOW_HOME_PICKS) { reject(label, 'home pick not allowed'); continue; }
+      const me = pick === 'home' ? f.teams.home : f.teams.away;
+      const strength = pick === 'home' ? homeTotal : awayTotal;
+
+      const l5 = pr.teams[pick] && pr.teams[pick].last_5;
+      if (!l5 || !(l5.played >= 3)) { reject(label, 'not enough recent games'); continue; }
+      const form = pct(l5.form);
+      const att = pct(l5.att);
+      const avgFor = parseFloat(l5.goals && l5.goals.for && l5.goals.for.average) || 0;
+      const wins = h2hWins(pr.h2h, me.id);
+
+      // The 6 checks (true = passed). R5 (odds) is added below.
+      const r = {
+        1: form >= 60,        // R1 form (approx.)
+        2: strength >= 60,    // R2 overall strength vs opponent (approx.)
+        3: wins >= 2,         // R3 won 2 of last 3 head-to-head
+        4: att >= 55,         // R4 attack rating (approx.)
+        5: false,             // R5 odds 1.20-1.50
+        6: avgFor >= 1.6      // R6 about 8+ goals in last 5 (approx.)
+      };
+      const others = [1, 2, 3, 4, 6].filter((k) => r[k]).length;
+      if (others < MIN_RULES - 1) {
+        reject(label, `only ${others} of 5 non-odds checks (failed R${[1, 2, 3, 4, 6].filter((k) => !r[k]).join(', R')})`);
+        continue;
+      }
+
+      // Odds only for games that can still reach the minimum score
       const odds = await api(`/odds?fixture=${f.fixture.id}&bet=1`);
       const vals = [];
-      for (const bm of (odds[0]?.bookmakers || [])) {
-        const bet = bm.bets.find(b => b.id === 1);
-        const v = bet?.values.find(x => x.value === (pick === 'home' ? 'Home' : 'Away'));
+      for (const bm of (odds[0] && odds[0].bookmakers) || []) {
+        const bet = bm.bets.find((b) => b.id === 1);
+        const v = bet && bet.values.find((x) => x.value === (pick === 'home' ? 'Home' : 'Away'));
         if (v) vals.push(parseFloat(v.odd));
       }
       if (!vals.length) { reject(label, 'no odds'); continue; }
       const odd = Math.round((vals.reduce((a, b) => a + b, 0) / vals.length) * 100) / 100;
+      r[5] = odd >= 1.2 && odd <= 1.5;
 
-      // API needs a season: use this year, and last year too if there is not enough history
-      const yr = Number(date.slice(0, 4));
-      let hist = await api(`/fixtures?team=${me.id}&season=${yr}&from=${RANGE_FROM}&to=${RANGE_TO}`);
-      let mine = summarize(hist, me.id);
-      if (mine.results.length < 5 || mine.home4.length < 4 || mine.away4.length < 4) {
-        hist = hist.concat(await api(`/fixtures?team=${me.id}&season=${yr - 1}&from=${RANGE_FROM}&to=${RANGE_TO}`));
-        mine = summarize(hist, me.id);
-      }
-      if (mine.results.length < 5 || mine.home4.length < 4 || mine.away4.length < 4) {
-        reject(label, 'not enough history'); continue;
-      }
-      const h2h = summarize(await api(`/fixtures/headtohead?h2h=${me.id}-${opp.id}`), me.id).results.slice(0, 3);
-
-      // Score the 6 checks (true = passed)
-      const r = {
-        1: ruleForm(mine.results),
-        2: ruleVenue(pick === 'home' ? mine.home4 : mine.away4),
-        3: ruleH2H(h2h),
-        4: ruleGoals(mine.scored),
-        5: ruleOdds(odd),
-        6: ruleTotalGoals(mine.scored)
-      };
-      const failed = Object.keys(r).filter(k => !r[k]).map(Number);
+      const failed = Object.keys(r).filter((k) => !r[k]).map(Number);
       const score = TOTAL_RULES - failed.length;
       if (score < MIN_RULES) {
         reject(label, `only ${score}/${TOTAL_RULES} (failed R${failed.join(', R')})`);
@@ -228,7 +162,8 @@ try {
         id: f.fixture.id, league: f.league.name,
         home: f.teams.home.name, away: f.teams.away.name,
         time: f.fixture.date, pick, pick_team: me.name, odd,
-        score, total_rules: TOTAL_RULES, failed_rules: failed
+        score, total_rules: TOTAL_RULES, failed_rules: failed,
+        form, strength, h2h_wins: wins, attack: att, avg_scored: avgFor
       });
     } catch (e) {
       if (e.message === 'LIMIT') { limitHit = true; reject(label, 'request limit reached'); break; }
@@ -243,7 +178,7 @@ try {
 }
 
 const seen = new Set();
-out.rejected = out.rejected.filter(r => {
+out.rejected = out.rejected.filter((r) => {
   const k = r.game + '|' + r.why;
   if (seen.has(k)) return false;
   seen.add(k);
@@ -256,7 +191,7 @@ out.passed.sort((a, b) => (b.score || 0) - (a.score || 0) || a.odd - b.odd);
 // Build tickets by score tier (once a ticket is made for the day it is kept)
 for (const t of TIERS) {
   if (out.tickets[t.key]) continue;
-  const games = out.passed.filter(g => g.score === t.score).slice(0, t.max);
+  const games = out.passed.filter((g) => g.score === t.score).slice(0, t.max);
   if (games.length) {
     out.tickets[t.key] = {
       games,
