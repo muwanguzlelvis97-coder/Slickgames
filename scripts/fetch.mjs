@@ -188,10 +188,13 @@ out.rejected = out.rejected.filter((r) => {
 // Best score first, then lowest odd
 out.passed.sort((a, b) => (b.score || 0) - (a.score || 0) || a.odd - b.odd);
 
-// Build tickets by score tier (once a ticket is made for the day it is kept)
+// Build tickets by score tier. Games already on a ticket stay; new games are added until the ticket is full
 for (const t of TIERS) {
-  if (out.tickets[t.key]) continue;
-  const games = out.passed.filter((g) => g.score === t.score).slice(0, t.max);
+  const existing = out.tickets[t.key] ? out.tickets[t.key].games : [];
+  const have = new Set(existing.map((g) => g.id));
+  const room = Math.max(0, t.max - existing.length);
+  const add = out.passed.filter((g) => g.score === t.score && !have.has(g.id)).slice(0, room);
+  const games = existing.concat(add);
   if (games.length) {
     out.tickets[t.key] = {
       games,
