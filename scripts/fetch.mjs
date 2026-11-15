@@ -67,7 +67,9 @@ async function api(path) {
   used++;
   const res = await fetch(BASE + path, { headers: { 'x-apisports-key': KEY } });
   const data = await res.json();
+  out.requests_remaining = res.headers.get('x-ratelimit-requests-remaining'); // free requests left today
   if (data.errors && Object.keys(data.errors).length) throw new Error(JSON.stringify(data.errors));
+  if (data.response === undefined) throw new Error('API said: ' + JSON.stringify(data).slice(0, 200));
   return data.response;
 }
 
@@ -205,6 +207,7 @@ try {
   }
 } catch (e) {
   console.log('Stopped early:', e.message);
+  out.error = String(e.message).slice(0, 300); // shown in games.json so we can see why
 }
 
 const seen = new Set();
