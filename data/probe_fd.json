@@ -1,0 +1,17 @@
+{
+  "generated_at": "2026-11-15T09:22:11.738Z",
+  "tests": [
+    {
+      "test": "matches next 10 days",
+      "status": 200,
+      "error": null,
+      "left_this_minute": null,
+      "count": 0,
+      "sample": []
+    },
+    {
+      "test": "no match found in the next 10 days for the free competitions"
+    }
+  ],
+  "requests_used": 1
+}
