@@ -2,9 +2,6 @@ name: Fetch games
 
 on:
   workflow_dispatch:
-  schedule:
-    - cron: '0 21 * * *'   # midnight Kampala
-    - cron: '0 9 * * *'    # midday Kampala
 
 permissions:
   contents: write
