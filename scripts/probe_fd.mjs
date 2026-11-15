@@ -1,6 +1,6 @@
 import { mkdirSync, writeFileSync } from 'node:fs';
 
-// Test of the football-data.org FREE plan. Writes data/probe_fd.json. Uses 4 requests.
+// Test 2 of the football-data.org FREE plan. Writes data/probe_fd.json. Uses 5 requests.
 const KEY = process.env.FOOTBALL_DATA_KEY;
 const BASE = 'https://api.football-data.org/v4';
 const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
@@ -13,49 +13,48 @@ async function call(path) {
     const res = await fetch(BASE + path, { headers: { 'X-Auth-Token': KEY || '' } });
     let body = null;
     try { body = await res.json(); } catch (e) {}
-    return { status: res.status, left_this_minute: res.headers.get('x-requests-available-minute'), body };
+    return { path, status: res.status, body };
   } catch (e) {
-    return { status: 0, error: String(e), body: null };
+    return { path, status: 0, error: String(e), body: null };
   }
 }
 const day = (offset) => new Date(Date.now() + offset * 86400000).toISOString().slice(0, 10);
-const out = { generated_at: new Date().toISOString(), tests: [] };
 const fail = (r) => (r.status >= 200 && r.status < 300 ? null : (r.body && r.body.message) || r.error || 'HTTP ' + r.status);
-
-// 1. matches in the next 10 days (all competitions in the free plan)
-const m = await call(`/matches?dateFrom=${day(0)}&dateTo=${day(9)}`);
-const matches = (m.body && m.body.matches) || [];
-out.tests.push({
-  test: 'matches next 10 days', status: m.status, error: fail(m), left_this_minute: m.left_this_minute,
-  count: matches.length,
-  sample: matches.slice(0, 8).map((x) => `${x.utcDate} | ${x.competition && x.competition.code} | ${x.homeTeam && x.homeTeam.name} v ${x.awayTeam && x.awayTeam.name} | ${x.status}`)
+const line = (x) => `${x.utcDate} | ${x.competition && x.competition.code} | ${x.homeTeam && x.homeTeam.name} ${x.score && x.score.fullTime && x.score.fullTime.home != null ? x.score.fullTime.home + '-' + x.score.fullTime.away : 'v'} ${x.awayTeam && x.awayTeam.name} | ${x.status}`;
+const out = { generated_at: new Date().toISOString(), tests: [] };
+const add = (name, r, list, n) => out.tests.push({
+  test: name, path: r.path, status: r.status, error: fail(r),
+  count: list ? list.length : undefined,
+  sample: list ? list.slice(n < 0 ? n : 0, n < 0 ? undefined : n).map(line) : undefined
 });
 
-const first = matches.find((x) => x.status === 'TIMED' || x.status === 'SCHEDULED') || matches[0];
+// 1. scheduled Premier League matches (are future fixtures visible?)
+const a = await call('/competitions/PL/matches?status=SCHEDULED');
+const al = (a.body && a.body.matches) || [];
+add('PL scheduled matches', a, al, 4);
+
+// 2. all competitions, a past week (does the date filter work at all?)
+const b = await call(`/matches?dateFrom=${day(-9)}&dateTo=${day(-4)}`);
+const bl = (b.body && b.body.matches) || [];
+add('matches last week, all competitions', b, bl, 6);
+
+// 3. a team's finished matches (Arsenal, id 57)
+const c = await call('/teams/57/matches?status=FINISHED&limit=12');
+const cl = (c.body && c.body.matches) || [];
+add('Arsenal finished matches', c, cl, -6);
+
+// 4. head to head for the first scheduled PL match
+const first = al[0];
 if (first) {
-  const label = `${first.homeTeam.name} v ${first.awayTeam.name}`;
-  // 2. finished matches of the home team (for form, home record, goals)
-  const t = await call(`/teams/${first.homeTeam.id}/matches?status=FINISHED&limit=12`);
-  const tm = (t.body && t.body.matches) || [];
-  out.tests.push({
-    test: 'team finished matches', game: label, status: t.status, error: fail(t),
-    count: tm.length,
-    sample: tm.slice(-6).map((x) => `${x.utcDate.slice(0, 10)} | ${x.competition && x.competition.code} | ${x.homeTeam.name} ${x.score && x.score.fullTime && x.score.fullTime.home}-${x.score && x.score.fullTime && x.score.fullTime.away} ${x.awayTeam.name}`)
-  });
-  // 3. head to head
-  const h = await call(`/matches/${first.id}/head2head?limit=5`);
-  const hm = (h.body && h.body.matches) || [];
-  out.tests.push({
-    test: 'head to head', game: label, status: h.status, error: fail(h),
-    count: hm.length,
-    sample: hm.slice(0, 5).map((x) => `${x.utcDate.slice(0, 10)} | ${x.homeTeam.name} ${x.score && x.score.fullTime && x.score.fullTime.home}-${x.score && x.score.fullTime && x.score.fullTime.away} ${x.awayTeam.name}`)
-  });
-  // 4. same team, previous season
-  const p = await call(`/teams/${first.homeTeam.id}/matches?status=FINISHED&season=${new Date().getUTCFullYear() - 1}&limit=5`);
-  out.tests.push({ test: 'team matches previous season', status: p.status, error: fail(p), count: ((p.body && p.body.matches) || []).length });
-} else {
-  out.tests.push({ test: 'no match found in the next 10 days for the free competitions' });
+  const d = await call(`/matches/${first.id}/head2head?limit=5`);
+  const dl = (d.body && d.body.matches) || [];
+  add('head to head ' + first.homeTeam.name + ' v ' + first.awayTeam.name, d, dl, 5);
 }
+
+// 5. same week range but only Premier League + Championship + La Liga
+const e = await call(`/matches?competitions=PL,ELC,PD&dateFrom=${day(-9)}&dateTo=${day(-4)}`);
+const el = (e.body && e.body.matches) || [];
+add('matches last week, PL+ELC+PD only', e, el, 4);
 
 out.requests_used = used;
 mkdirSync('data', { recursive: true });
