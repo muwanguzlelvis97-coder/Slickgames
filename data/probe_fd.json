@@ -1,17 +1,38 @@
 {
-  "generated_at": "2026-11-15T09:22:11.738Z",
+  "generated_at": "2026-11-15T09:27:40.868Z",
   "tests": [
     {
-      "test": "matches next 10 days",
-      "status": 200,
-      "error": null,
-      "left_this_minute": null,
+      "test": "PL scheduled matches",
+      "path": "/competitions/PL/matches?status=SCHEDULED",
+      "status": 403,
+      "error": "The resource you are looking for is restricted and apparently not within your permissions. Please check your subscription.",
       "count": 0,
       "sample": []
     },
     {
-      "test": "no match found in the next 10 days for the free competitions"
+      "test": "matches last week, all competitions",
+      "path": "/matches?dateFrom=2026-11-06&dateTo=2026-11-11",
+      "status": 200,
+      "error": null,
+      "count": 0,
+      "sample": []
+    },
+    {
+      "test": "Arsenal finished matches",
+      "path": "/teams/57/matches?status=FINISHED&limit=12",
+      "status": 403,
+      "error": "The resource you are looking for is restricted and apparently not within your permissions. Please check your subscription.",
+      "count": 0,
+      "sample": []
+    },
+    {
+      "test": "matches last week, PL+ELC+PD only",
+      "path": "/matches?competitions=PL,ELC,PD&dateFrom=2026-11-06&dateTo=2026-11-11",
+      "status": 200,
+      "error": null,
+      "count": 0,
+      "sample": []
     }
   ],
-  "requests_used": 1
+  "requests_used": 4
 }
