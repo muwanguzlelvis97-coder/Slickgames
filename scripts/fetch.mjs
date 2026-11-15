@@ -156,6 +156,20 @@ try {
       const avgFor = parseFloat(l5.goals && l5.goals.for && l5.goals.for.average) || 0;
       const wins = h2hWins(pr.h2h, me.id);
 
+      // Display-only fields (not a rule, no filtering): Total Average Attack and Over Display
+      const attOf = (side) => {
+        const a = pr.teams[side] && pr.teams[side].last_5 && pr.teams[side].last_5.att;
+        return a == null || a === '' ? null : pct(a);
+      };
+      const attHome = attOf('home');
+      const attAway = attOf('away');
+      let totalAvgAttack = null;
+      let overDisplay = null;
+      if (attHome !== null && attAway !== null) {
+        totalAvgAttack = Math.round(((attHome + attAway) / 2) * 10) / 10;
+        overDisplay = totalAvgAttack >= 60 ? 'OVER 2 GOALS' : totalAvgAttack >= 30 ? 'OVER 1 GOAL' : 'No Over';
+      }
+
       // The 6 checks (true = passed). R5 (odds) is added below.
       const r = {
         1: form >= 60,        // R1 form (approx.)
@@ -195,7 +209,8 @@ try {
         home: f.teams.home.name, away: f.teams.away.name,
         time: f.fixture.date, pick, pick_team: me.name, odd,
         score, total_rules: TOTAL_RULES, failed_rules: failed,
-        form, strength, h2h_wins: wins, attack: att, avg_scored: avgFor
+        form, strength, h2h_wins: wins, attack: att, avg_scored: avgFor,
+        attack_home: attHome, attack_away: attAway, total_avg_attack: totalAvgAttack, over_display: overDisplay
       });
     } catch (e) {
       if (e.message === 'LIMIT') { limitHit = true; reject(label, 'request limit reached'); break; }
