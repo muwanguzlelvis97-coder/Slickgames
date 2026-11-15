@@ -40,6 +40,8 @@ header p{margin:0 auto;color:var(--muted);max-width:30ch}
 .game .odd{font-weight:700;color:var(--gold);font-size:1.15rem}
 .game .score{margin-top:6px;font-size:.88rem;color:var(--ok)}
 .game .missed{color:var(--muted)}
+.game .extra{margin-top:6px;font-size:.88rem;color:var(--muted)}
+.game .extra b{color:var(--text)}
 h2{color:var(--gold);font-size:1.45rem;margin:34px 0 12px}
 ol.rules{padding-left:1.3rem;margin:0}
 ol.rules li{margin-bottom:10px}
@@ -131,6 +133,9 @@ footer{text-align:center;color:var(--muted);font-size:.9rem;padding:8px 0 40px}
         '<div class="pick"><span>Pick: <b>'+esc(g.pick_team)+' to win</b></span><span class="odd">'+esc(Number(g.odd).toFixed(2))+'</span></div>'+
         '<div class="score">'+esc(g.score)+' of '+esc(g.total_rules||6)+' rules passed'+
         (missed?' <span class="missed">(missed: '+esc(missed)+')</span>':'')+'</div>'+
+        (g.total_avg_attack!=null && g.over_display
+          ? '<div class="extra">Total Average Attack: <b>'+esc(Number(g.total_avg_attack).toFixed(1))+'%</b><br>Over Display: <b>'+esc(g.over_display)+'</b></div>'
+          : '')+
       '</article>';
     }).join('');
   }
@@ -167,4 +172,4 @@ footer{text-align:center;color:var(--muted);font-size:.9rem;padding:8px 0 40px}
 })();
 </script>
 </body>
-    </html>
+                                                                                          </html>
