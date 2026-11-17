@@ -75,9 +75,41 @@
       "tier": "SAFE",
       "on_ticket": true,
       "status": "pending"
+    },
+    {
+      "id": 1492453,
+      "kickoff": "2026-11-18T23:30:00+00:00",
+      "league": "Serie A",
+      "league_id": 71,
+      "country": "Brazil",
+      "home": "Flamengo",
+      "away": "Atletico Paranaense",
+      "pick": "home",
+      "pick_team": "Flamengo",
+      "odd": 1.23,
+      "score": 5,
+      "tier": "SAFE",
+      "on_ticket": true,
+      "status": "pending"
+    },
+    {
+      "id": 1492452,
+      "kickoff": "2026-11-18T23:30:00+00:00",
+      "league": "Serie A",
+      "league_id": 71,
+      "country": "Brazil",
+      "home": "Cruzeiro",
+      "away": "Palmeiras",
+      "pick": "away",
+      "pick_team": "Palmeiras",
+      "odd": 2.43,
+      "score": 4,
+      "tier": "VALUE",
+      "on_ticket": true,
+      "status": "pending"
     }
   ],
-  "updated_at": "2026-11-17T17:56:04.625Z",
+  "updated_at": "2026-11-17T21:21:05.430Z",
   "summary": {
     "overall": {
       "won": 0,
@@ -88,7 +120,7 @@
       "breakeven_rate": null,
       "units": 0
     },
-    "pending": 5,
+    "pending": 7,
     "tiers": {
       "ULTRA_SAFE": {
         "won": 0,

@@ -1,228 +1,149 @@
 {
-  "date": "2026-11-17",
-  "generated_at": "2026-11-17T17:54:35.086Z",
+  "date": "2026-11-18",
+  "generated_at": "2026-11-17T21:20:24.429Z",
   "mode": "TRIAL (free data)",
-  "games_in_leagues": 12,
-  "candidates": 12,
-  "requests_used": 14,
+  "games_in_leagues": 4,
+  "candidates": 4,
+  "requests_used": 7,
   "passed": [
     {
-      "id": 1528992,
-      "league": "UEFA Nations League",
-      "league_id": 5,
-      "country": "World",
-      "home": "Wales",
-      "away": "Portugal",
-      "time": "2026-11-17T19:45:00+00:00",
-      "pick": "away",
-      "pick_team": "Portugal",
-      "odd": 1.41,
-      "score": 6,
-      "total_rules": 6,
-      "failed_rules": [],
-      "form": 80,
-      "strength": 69,
-      "h2h_wins": 2,
-      "attack": 67,
-      "avg_scored": 2,
-      "attack_home": 20,
-      "attack_away": 67,
-      "total_avg_attack": 43.5,
-      "over_display": "OVER 1 GOAL"
-    },
-    {
-      "id": 1528996,
-      "league": "UEFA Nations League",
-      "league_id": 5,
-      "country": "World",
-      "home": "Israel",
-      "away": "Austria",
-      "time": "2026-11-17T19:45:00+00:00",
-      "pick": "away",
-      "pick_team": "Austria",
-      "odd": 1.8,
+      "id": 1492453,
+      "league": "Serie A",
+      "league_id": 71,
+      "country": "Brazil",
+      "home": "Flamengo",
+      "away": "Atletico Paranaense",
+      "time": "2026-11-18T23:30:00+00:00",
+      "pick": "home",
+      "pick_team": "Flamengo",
+      "odd": 1.23,
       "score": 5,
       "total_rules": 6,
       "failed_rules": [
-        5
+        3
       ],
-      "form": 73,
-      "strength": 66.4,
-      "h2h_wins": 2,
-      "attack": 67,
-      "avg_scored": 2,
-      "attack_home": 13,
-      "attack_away": 67,
-      "total_avg_attack": 40,
+      "form": 100,
+      "strength": 66.3,
+      "h2h_wins": 1,
+      "attack": 82,
+      "avg_scored": 2.8,
+      "attack_home": 82,
+      "attack_away": 35,
+      "total_avg_attack": 58.5,
       "over_display": "OVER 1 GOAL"
     },
     {
-      "id": 1528998,
-      "league": "UEFA Nations League",
-      "league_id": 5,
-      "country": "World",
-      "home": "Poland",
-      "away": "Sweden",
-      "time": "2026-11-17T19:45:00+00:00",
+      "id": 1492452,
+      "league": "Serie A",
+      "league_id": 71,
+      "country": "Brazil",
+      "home": "Cruzeiro",
+      "away": "Palmeiras",
+      "time": "2026-11-18T23:30:00+00:00",
       "pick": "away",
-      "pick_team": "Sweden",
-      "odd": 3.06,
-      "score": 5,
+      "pick_team": "Palmeiras",
+      "odd": 2.43,
+      "score": 4,
       "total_rules": 6,
       "failed_rules": [
+        3,
         5
       ],
       "form": 87,
-      "strength": 63.6,
-      "h2h_wins": 2,
-      "attack": 67,
-      "avg_scored": 2,
-      "attack_home": 53,
-      "attack_away": 67,
-      "total_avg_attack": 60,
+      "strength": 62.3,
+      "h2h_wins": 0,
+      "attack": 82,
+      "avg_scored": 2.8,
+      "attack_home": 65,
+      "attack_away": 82,
+      "total_avg_attack": 73.5,
       "over_display": "OVER 2 GOALS"
     }
   ],
   "tickets": {
-    "ULTRA_SAFE": {
-      "games": [
-        {
-          "id": 1528992,
-          "league": "UEFA Nations League",
-          "league_id": 5,
-          "country": "World",
-          "home": "Wales",
-          "away": "Portugal",
-          "time": "2026-11-17T19:45:00+00:00",
-          "pick": "away",
-          "pick_team": "Portugal",
-          "odd": 1.41,
-          "score": 6,
-          "total_rules": 6,
-          "failed_rules": [],
-          "form": 80,
-          "strength": 69,
-          "h2h_wins": 2,
-          "attack": 67,
-          "avg_scored": 2,
-          "attack_home": 20,
-          "attack_away": 67,
-          "total_avg_attack": 43.5,
-          "over_display": "OVER 1 GOAL"
-        }
-      ],
-      "total_odds": 1.41
-    },
     "SAFE": {
       "games": [
         {
-          "id": 1528996,
-          "league": "UEFA Nations League",
-          "league_id": 5,
-          "country": "World",
-          "home": "Israel",
-          "away": "Austria",
-          "time": "2026-11-17T19:45:00+00:00",
-          "pick": "away",
-          "pick_team": "Austria",
-          "odd": 1.8,
+          "id": 1492453,
+          "league": "Serie A",
+          "league_id": 71,
+          "country": "Brazil",
+          "home": "Flamengo",
+          "away": "Atletico Paranaense",
+          "time": "2026-11-18T23:30:00+00:00",
+          "pick": "home",
+          "pick_team": "Flamengo",
+          "odd": 1.23,
           "score": 5,
           "total_rules": 6,
           "failed_rules": [
-            5
+            3
           ],
-          "form": 73,
-          "strength": 66.4,
-          "h2h_wins": 2,
-          "attack": 67,
-          "avg_scored": 2,
-          "attack_home": 13,
-          "attack_away": 67,
-          "total_avg_attack": 40,
+          "form": 100,
+          "strength": 66.3,
+          "h2h_wins": 1,
+          "attack": 82,
+          "avg_scored": 2.8,
+          "attack_home": 82,
+          "attack_away": 35,
+          "total_avg_attack": 58.5,
           "over_display": "OVER 1 GOAL"
-        },
+        }
+      ],
+      "total_odds": 1.23
+    },
+    "VALUE": {
+      "games": [
         {
-          "id": 1528998,
-          "league": "UEFA Nations League",
-          "league_id": 5,
-          "country": "World",
-          "home": "Poland",
-          "away": "Sweden",
-          "time": "2026-11-17T19:45:00+00:00",
+          "id": 1492452,
+          "league": "Serie A",
+          "league_id": 71,
+          "country": "Brazil",
+          "home": "Cruzeiro",
+          "away": "Palmeiras",
+          "time": "2026-11-18T23:30:00+00:00",
           "pick": "away",
-          "pick_team": "Sweden",
-          "odd": 3.06,
-          "score": 5,
+          "pick_team": "Palmeiras",
+          "odd": 2.43,
+          "score": 4,
           "total_rules": 6,
           "failed_rules": [
+            3,
             5
           ],
           "form": 87,
-          "strength": 63.6,
-          "h2h_wins": 2,
-          "attack": 67,
-          "avg_scored": 2,
-          "attack_home": 53,
-          "attack_away": 67,
-          "total_avg_attack": 60,
+          "strength": 62.3,
+          "h2h_wins": 0,
+          "attack": 82,
+          "avg_scored": 2.8,
+          "attack_home": 65,
+          "attack_away": 82,
+          "total_avg_attack": 73.5,
           "over_display": "OVER 2 GOALS"
         }
       ],
-      "total_odds": 5.51
+      "total_odds": 2.43
     }
   },
   "rejected": [
     {
-      "game": "Denmark v Norway",
-      "why": "only 3/6 (failed R2, R3, R5)"
-    },
-    {
-      "game": "Ukraine v Georgia",
-      "why": "only 1 of 5 non-odds checks (failed R1, R3, R4, R6)"
-    },
-    {
-      "game": "Hungary v Northern Ireland",
-      "why": "only 1 of 5 non-odds checks (failed R2, R3, R4, R6)"
-    },
-    {
-      "game": "Rep. Of Ireland v Kosovo",
+      "game": "Coritiba v Santos",
       "why": "only 0 of 5 non-odds checks (failed R1, R2, R3, R4, R6)"
     },
     {
-      "game": "Bosnia & Herzegovina v Romania",
-      "why": "only 3/6 (failed R1, R4, R5)"
-    },
-    {
-      "game": "Chile v Colombia",
-      "why": "friendly skipped (league games passed)"
-    },
-    {
-      "game": "Argentina v Costa Rica",
-      "why": "friendly skipped (league games passed)"
-    },
-    {
-      "game": "Ecuador v Bolivia",
-      "why": "friendly skipped (league games passed)"
-    },
-    {
-      "game": "Uruguay v Dominican Republic",
-      "why": "friendly skipped (league games passed)"
+      "game": "Remo v Chapecoense-sc",
+      "why": "only 1 of 5 non-odds checks (failed R1, R3, R4, R6)"
     }
   ],
-  "requests_remaining": "95",
+  "requests_remaining": "85",
   "league_warnings": [],
   "leagues_today": [
-    "5 UEFA Nations League (World)",
-    "10 Friendlies (World)"
+    "71 Serie A (Brazil)"
   ],
   "checked": [
-    1528992,
-    1528993,
-    1528994,
-    1528995,
-    1528996,
-    1528997,
-    1528998,
-    1528999
+    1492451,
+    1492456,
+    1492452,
+    1492453
   ]
 }
