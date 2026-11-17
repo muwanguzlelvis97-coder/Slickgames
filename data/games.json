@@ -1,10 +1,10 @@
 {
   "date": "2026-11-18",
-  "generated_at": "2026-11-17T21:20:24.429Z",
+  "generated_at": "2026-11-17T21:37:08.222Z",
   "mode": "TRIAL (free data)",
-  "games_in_leagues": 4,
-  "candidates": 4,
-  "requests_used": 7,
+  "games_in_leagues": 0,
+  "candidates": 0,
+  "requests_used": 1,
   "passed": [
     {
       "id": 1492453,
@@ -135,11 +135,9 @@
       "why": "only 1 of 5 non-odds checks (failed R1, R3, R4, R6)"
     }
   ],
-  "requests_remaining": "85",
+  "requests_remaining": "78",
   "league_warnings": [],
-  "leagues_today": [
-    "71 Serie A (Brazil)"
-  ],
+  "leagues_today": [],
   "checked": [
     1492451,
     1492456,
