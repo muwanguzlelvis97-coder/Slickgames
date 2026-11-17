@@ -27,9 +27,57 @@
       "tier": "VALUE",
       "on_ticket": true,
       "status": "pending"
+    },
+    {
+      "id": 1528992,
+      "kickoff": "2026-11-17T19:45:00+00:00",
+      "league": "UEFA Nations League",
+      "league_id": 5,
+      "country": "World",
+      "home": "Wales",
+      "away": "Portugal",
+      "pick": "away",
+      "pick_team": "Portugal",
+      "odd": 1.41,
+      "score": 6,
+      "tier": "ULTRA_SAFE",
+      "on_ticket": true,
+      "status": "pending"
+    },
+    {
+      "id": 1528996,
+      "kickoff": "2026-11-17T19:45:00+00:00",
+      "league": "UEFA Nations League",
+      "league_id": 5,
+      "country": "World",
+      "home": "Israel",
+      "away": "Austria",
+      "pick": "away",
+      "pick_team": "Austria",
+      "odd": 1.8,
+      "score": 5,
+      "tier": "SAFE",
+      "on_ticket": true,
+      "status": "pending"
+    },
+    {
+      "id": 1528998,
+      "kickoff": "2026-11-17T19:45:00+00:00",
+      "league": "UEFA Nations League",
+      "league_id": 5,
+      "country": "World",
+      "home": "Poland",
+      "away": "Sweden",
+      "pick": "away",
+      "pick_team": "Sweden",
+      "odd": 3.06,
+      "score": 5,
+      "tier": "SAFE",
+      "on_ticket": true,
+      "status": "pending"
     }
   ],
-  "updated_at": "2026-11-15T10:16:28.295Z",
+  "updated_at": "2026-11-17T17:56:04.625Z",
   "summary": {
     "overall": {
       "won": 0,
@@ -40,7 +88,7 @@
       "breakeven_rate": null,
       "units": 0
     },
-    "pending": 2,
+    "pending": 5,
     "tiers": {
       "ULTRA_SAFE": {
         "won": 0,
