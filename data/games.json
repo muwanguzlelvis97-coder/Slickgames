@@ -1,6 +1,6 @@
 {
   "date": "2026-11-21",
-  "generated_at": "2026-11-20T21:31:53.993Z",
+  "generated_at": "2026-11-20T21:35:28.518Z",
   "mode": "TRIAL (free data)",
   "games_in_leagues": 127,
   "candidates": 127,
@@ -544,7 +544,7 @@
       "why": "request limit reached"
     }
   ],
-  "requests_remaining": "89",
+  "requests_remaining": "40",
   "league_warnings": [],
   "leagues_today": [
     "39 Premier League (England)",
