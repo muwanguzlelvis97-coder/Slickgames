@@ -6,7 +6,7 @@ import { mkdirSync, writeFileSync, readFileSync, existsSync } from 'node:fs';
 
 const KEY = process.env.API_FOOTBALL_KEY;
 const BASE = 'https://v3.football.api-sports.io';
-const MAX_REQUESTS = 30;
+const MAX_REQUESTS = 80;
 const TOTAL_RULES = 6;
 const MIN_RULES = 4; // a game must pass at least 4 of the 6 checks (4/6 = Value)
 const ALLOW_HOME_PICKS = true;
