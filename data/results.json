@@ -122,7 +122,8 @@
       "score": 6,
       "tier": "ULTRA_SAFE",
       "on_ticket": true,
-      "status": "pending"
+      "status": "won",
+      "final": "4-0"
     },
     {
       "id": 1550205,
@@ -138,7 +139,8 @@
       "score": 6,
       "tier": "ULTRA_SAFE",
       "on_ticket": true,
-      "status": "pending"
+      "status": "won",
+      "final": "1-5"
     },
     {
       "id": 1550200,
@@ -154,7 +156,8 @@
       "score": 6,
       "tier": "ULTRA_SAFE",
       "on_ticket": true,
-      "status": "pending"
+      "status": "won",
+      "final": "2-0"
     },
     {
       "id": 1552824,
@@ -170,7 +173,8 @@
       "score": 6,
       "tier": "ULTRA_SAFE",
       "on_ticket": false,
-      "status": "pending"
+      "status": "won",
+      "final": "2-3"
     },
     {
       "id": 1550202,
@@ -186,7 +190,8 @@
       "score": 5,
       "tier": "SAFE",
       "on_ticket": true,
-      "status": "pending"
+      "status": "won",
+      "final": "3-0"
     },
     {
       "id": 1557467,
@@ -202,7 +207,8 @@
       "score": 5,
       "tier": "SAFE",
       "on_ticket": true,
-      "status": "pending"
+      "status": "lost",
+      "final": "0-0"
     },
     {
       "id": 1557468,
@@ -218,7 +224,8 @@
       "score": 5,
       "tier": "SAFE",
       "on_ticket": true,
-      "status": "pending"
+      "status": "won",
+      "final": "2-0"
     },
     {
       "id": 1575225,
@@ -234,7 +241,8 @@
       "score": 4,
       "tier": "VALUE",
       "on_ticket": true,
-      "status": "pending"
+      "status": "won",
+      "final": "1-5"
     },
     {
       "id": 1557476,
@@ -250,7 +258,8 @@
       "score": 4,
       "tier": "VALUE",
       "on_ticket": true,
-      "status": "pending"
+      "status": "won",
+      "final": "2-0"
     },
     {
       "id": 1557470,
@@ -266,65 +275,471 @@
       "score": 4,
       "tier": "VALUE",
       "on_ticket": true,
+      "status": "lost",
+      "final": "1-4"
+    },
+    {
+      "id": 1570455,
+      "kickoff": "2026-11-22T13:00:00+00:00",
+      "league": "La Liga",
+      "league_id": 140,
+      "country": "Spain",
+      "home": "Barcelona",
+      "away": "Villarreal",
+      "pick": "home",
+      "pick_team": "Barcelona",
+      "odd": 1.2,
+      "score": 6,
+      "tier": "ULTRA_SAFE",
+      "on_ticket": true,
+      "status": "pending"
+    },
+    {
+      "id": 1558685,
+      "kickoff": "2026-11-22T15:00:00+00:00",
+      "league": "Jupiler Pro League",
+      "league_id": 144,
+      "country": "Belgium",
+      "home": "Kortrijk",
+      "away": "Union St. Gilloise",
+      "pick": "away",
+      "pick_team": "Union St. Gilloise",
+      "odd": 1.37,
+      "score": 6,
+      "tier": "ULTRA_SAFE",
+      "on_ticket": true,
+      "status": "pending"
+    },
+    {
+      "id": 1492465,
+      "kickoff": "2026-11-22T00:00:00+00:00",
+      "league": "Serie A",
+      "league_id": 71,
+      "country": "Brazil",
+      "home": "Chapecoense-sc",
+      "away": "Cruzeiro",
+      "pick": "away",
+      "pick_team": "Cruzeiro",
+      "odd": 1.48,
+      "score": 6,
+      "tier": "ULTRA_SAFE",
+      "on_ticket": true,
+      "status": "pending"
+    },
+    {
+      "id": 1584474,
+      "kickoff": "2026-11-22T16:00:00+00:00",
+      "league": "Süper Lig",
+      "league_id": 203,
+      "country": "Turkey",
+      "home": "Trabzonspor",
+      "away": "Eyüpspor",
+      "pick": "home",
+      "pick_team": "Trabzonspor",
+      "odd": 1.13,
+      "score": 5,
+      "tier": "SAFE",
+      "on_ticket": true,
+      "status": "pending"
+    },
+    {
+      "id": 1565530,
+      "kickoff": "2026-11-22T11:00:00+00:00",
+      "league": "Premier League",
+      "league_id": 333,
+      "country": "Ukraine",
+      "home": "Dynamo Kyiv",
+      "away": "Obolon'-Brovar",
+      "pick": "home",
+      "pick_team": "Dynamo Kyiv",
+      "odd": 1.21,
+      "score": 5,
+      "tier": "SAFE",
+      "on_ticket": true,
+      "status": "pending"
+    },
+    {
+      "id": 1552825,
+      "kickoff": "2026-11-22T14:00:00+00:00",
+      "league": "Ligue 1",
+      "league_id": 61,
+      "country": "France",
+      "home": "Paris FC",
+      "away": "Angers",
+      "pick": "home",
+      "pick_team": "Paris FC",
+      "odd": 1.33,
+      "score": 5,
+      "tier": "SAFE",
+      "on_ticket": true,
+      "status": "pending"
+    },
+    {
+      "id": 1649570,
+      "kickoff": "2026-11-22T19:00:00+00:00",
+      "league": "Liga Profesional Argentina",
+      "league_id": 128,
+      "country": "Argentina",
+      "home": "Rosario Central",
+      "away": "Gimnasia M.",
+      "pick": "home",
+      "pick_team": "Rosario Central",
+      "odd": 1.37,
+      "score": 5,
+      "tier": "SAFE",
+      "on_ticket": true,
+      "status": "pending"
+    },
+    {
+      "id": 1552822,
+      "kickoff": "2026-11-22T19:45:00+00:00",
+      "league": "Ligue 1",
+      "league_id": 61,
+      "country": "France",
+      "home": "Marseille",
+      "away": "Le Mans",
+      "pick": "home",
+      "pick_team": "Marseille",
+      "odd": 1.46,
+      "score": 5,
+      "tier": "SAFE",
+      "on_ticket": false,
+      "status": "pending"
+    },
+    {
+      "id": 1651119,
+      "kickoff": "2026-11-22T21:00:00+00:00",
+      "league": "Major League Soccer",
+      "league_id": 253,
+      "country": "USA",
+      "home": "Nashville SC",
+      "away": "FC Cincinnati",
+      "pick": "home",
+      "pick_team": "Nashville SC",
+      "odd": 1.48,
+      "score": 5,
+      "tier": "SAFE",
+      "on_ticket": false,
+      "status": "pending"
+    },
+    {
+      "id": 1557472,
+      "kickoff": "2026-11-22T14:00:00+00:00",
+      "league": "Premier League",
+      "league_id": 39,
+      "country": "England",
+      "home": "Hull City",
+      "away": "Brighton",
+      "pick": "away",
+      "pick_team": "Brighton",
+      "odd": 1.49,
+      "score": 5,
+      "tier": "SAFE",
+      "on_ticket": false,
+      "status": "pending"
+    },
+    {
+      "id": 1550197,
+      "kickoff": "2026-11-22T17:00:00+00:00",
+      "league": "Serie A",
+      "league_id": 135,
+      "country": "Italy",
+      "home": "AC Milan",
+      "away": "Frosinone",
+      "pick": "home",
+      "pick_team": "AC Milan",
+      "odd": 1.55,
+      "score": 5,
+      "tier": "SAFE",
+      "on_ticket": false,
+      "status": "pending"
+    },
+    {
+      "id": 1550198,
+      "kickoff": "2026-11-22T19:45:00+00:00",
+      "league": "Serie A",
+      "league_id": 135,
+      "country": "Italy",
+      "home": "Atalanta",
+      "away": "Inter",
+      "pick": "away",
+      "pick_team": "Inter",
+      "odd": 1.57,
+      "score": 5,
+      "tier": "SAFE",
+      "on_ticket": false,
+      "status": "pending"
+    },
+    {
+      "id": 1584473,
+      "kickoff": "2026-11-22T13:00:00+00:00",
+      "league": "Süper Lig",
+      "league_id": 203,
+      "country": "Turkey",
+      "home": "Konyaspor",
+      "away": "Beşiktaş",
+      "pick": "away",
+      "pick_team": "Beşiktaş",
+      "odd": 1.59,
+      "score": 5,
+      "tier": "SAFE",
+      "on_ticket": false,
+      "status": "pending"
+    },
+    {
+      "id": 1550199,
+      "kickoff": "2026-11-22T14:00:00+00:00",
+      "league": "Serie A",
+      "league_id": 135,
+      "country": "Italy",
+      "home": "Bologna",
+      "away": "Udinese",
+      "pick": "home",
+      "pick_team": "Bologna",
+      "odd": 1.72,
+      "score": 5,
+      "tier": "SAFE",
+      "on_ticket": false,
+      "status": "pending"
+    },
+    {
+      "id": 1584471,
+      "kickoff": "2026-11-22T13:00:00+00:00",
+      "league": "Süper Lig",
+      "league_id": 203,
+      "country": "Turkey",
+      "home": "Kasımpaşa",
+      "away": "Alanyaspor",
+      "pick": "home",
+      "pick_team": "Kasımpaşa",
+      "odd": 1.9,
+      "score": 5,
+      "tier": "SAFE",
+      "on_ticket": false,
+      "status": "pending"
+    },
+    {
+      "id": 1558681,
+      "kickoff": "2026-11-22T12:30:00+00:00",
+      "league": "Jupiler Pro League",
+      "league_id": 144,
+      "country": "Belgium",
+      "home": "SK Beveren",
+      "away": "Gent",
+      "pick": "away",
+      "pick_team": "Gent",
+      "odd": 1.98,
+      "score": 5,
+      "tier": "SAFE",
+      "on_ticket": false,
+      "status": "pending"
+    },
+    {
+      "id": 1584468,
+      "kickoff": "2026-11-22T10:30:00+00:00",
+      "league": "Süper Lig",
+      "league_id": 203,
+      "country": "Turkey",
+      "home": "Erzurumspor FK",
+      "away": "Göztepe",
+      "pick": "away",
+      "pick_team": "Göztepe",
+      "odd": 2.56,
+      "score": 5,
+      "tier": "SAFE",
+      "on_ticket": false,
+      "status": "pending"
+    },
+    {
+      "id": 1552225,
+      "kickoff": "2026-11-22T13:30:00+00:00",
+      "league": "Eredivisie",
+      "league_id": 88,
+      "country": "Netherlands",
+      "home": "Ajax",
+      "away": "ADO Den Haag",
+      "pick": "home",
+      "pick_team": "Ajax",
+      "odd": 1.15,
+      "score": 4,
+      "tier": "VALUE",
+      "on_ticket": true,
+      "status": "pending"
+    },
+    {
+      "id": 1558680,
+      "kickoff": "2026-11-22T17:30:00+00:00",
+      "league": "Jupiler Pro League",
+      "league_id": 144,
+      "country": "Belgium",
+      "home": "Anderlecht",
+      "away": "OH Leuven",
+      "pick": "home",
+      "pick_team": "Anderlecht",
+      "odd": 1.45,
+      "score": 4,
+      "tier": "VALUE",
+      "on_ticket": true,
+      "status": "pending"
+    },
+    {
+      "id": 1570456,
+      "kickoff": "2026-11-22T20:00:00+00:00",
+      "league": "La Liga",
+      "league_id": 140,
+      "country": "Spain",
+      "home": "Getafe",
+      "away": "Atletico Madrid",
+      "pick": "away",
+      "pick_team": "Atletico Madrid",
+      "odd": 1.57,
+      "score": 4,
+      "tier": "VALUE",
+      "on_ticket": true,
+      "status": "pending"
+    },
+    {
+      "id": 1570459,
+      "kickoff": "2026-11-22T15:15:00+00:00",
+      "league": "La Liga",
+      "league_id": 140,
+      "country": "Spain",
+      "home": "Racing Santander",
+      "away": "Real Sociedad",
+      "pick": "away",
+      "pick_team": "Real Sociedad",
+      "odd": 2.03,
+      "score": 4,
+      "tier": "VALUE",
+      "on_ticket": false,
+      "status": "pending"
+    },
+    {
+      "id": 1575224,
+      "kickoff": "2026-11-22T14:30:00+00:00",
+      "league": "Bundesliga",
+      "league_id": 78,
+      "country": "Germany",
+      "home": "FC Augsburg",
+      "away": "FSV Mainz 05",
+      "pick": "away",
+      "pick_team": "FSV Mainz 05",
+      "odd": 2.4,
+      "score": 4,
+      "tier": "VALUE",
+      "on_ticket": false,
+      "status": "pending"
+    },
+    {
+      "id": 1551045,
+      "kickoff": "2026-11-22T23:07:00+00:00",
+      "league": "Liga MX",
+      "league_id": 262,
+      "country": "Mexico",
+      "home": "Guadalajara Chivas",
+      "away": "Cruz Azul",
+      "pick": "away",
+      "pick_team": "Cruz Azul",
+      "odd": 2.74,
+      "score": 4,
+      "tier": "VALUE",
+      "on_ticket": false,
       "status": "pending"
     }
   ],
-  "updated_at": "2026-11-20T21:38:54.803Z",
+  "updated_at": "2026-11-21T21:36:03.193Z",
   "summary": {
     "overall": {
-      "won": 0,
-      "lost": 0,
-      "played": 0,
-      "win_rate": null,
-      "avg_odd": null,
-      "breakeven_rate": null,
-      "units": 0
+      "won": 8,
+      "lost": 2,
+      "played": 10,
+      "win_rate": 80,
+      "avg_odd": 1.54,
+      "breakeven_rate": 66.6,
+      "units": 1.66
     },
-    "pending": 17,
+    "pending": 30,
     "tiers": {
       "ULTRA_SAFE": {
-        "won": 0,
+        "won": 4,
         "lost": 0,
-        "played": 0,
-        "win_rate": null,
-        "avg_odd": null,
-        "breakeven_rate": null,
-        "units": 0
+        "played": 4,
+        "win_rate": 100,
+        "avg_odd": 1.33,
+        "breakeven_rate": 75.4,
+        "units": 1.32
       },
       "SAFE": {
-        "won": 0,
-        "lost": 0,
-        "played": 0,
-        "win_rate": null,
-        "avg_odd": null,
-        "breakeven_rate": null,
-        "units": 0
+        "won": 2,
+        "lost": 1,
+        "played": 3,
+        "win_rate": 66.7,
+        "avg_odd": 1.69,
+        "breakeven_rate": 60.3,
+        "units": 0.31
       },
       "VALUE": {
-        "won": 0,
-        "lost": 0,
-        "played": 0,
-        "win_rate": null,
-        "avg_odd": null,
-        "breakeven_rate": null,
-        "units": 0
+        "won": 2,
+        "lost": 1,
+        "played": 3,
+        "win_rate": 66.7,
+        "avg_odd": 1.66,
+        "breakeven_rate": 61.2,
+        "units": 0.03
       }
     },
     "tickets": {
       "ULTRA_SAFE": {
-        "won": 0,
+        "won": 1,
         "lost": 0
       },
       "SAFE": {
         "won": 0,
-        "lost": 0
+        "lost": 1
       },
       "VALUE": {
         "won": 0,
-        "lost": 0
+        "lost": 1
       }
     },
-    "by_league": {},
+    "by_league": {
+      "Bundesliga (Germany)": {
+        "won": 2,
+        "lost": 0,
+        "played": 2,
+        "win_rate": 100,
+        "avg_odd": 1.38,
+        "breakeven_rate": 72.9,
+        "units": 0.76
+      },
+      "Serie A (Italy)": {
+        "won": 3,
+        "lost": 0,
+        "played": 3,
+        "win_rate": 100,
+        "avg_odd": 1.32,
+        "breakeven_rate": 75.8,
+        "units": 0.96
+      },
+      "Ligue 1 (France)": {
+        "won": 1,
+        "lost": 0,
+        "played": 1,
+        "win_rate": 100,
+        "avg_odd": 1.46,
+        "breakeven_rate": 68.5,
+        "units": 0.46
+      },
+      "Premier League (England)": {
+        "won": 2,
+        "lost": 2,
+        "played": 4,
+        "win_rate": 50,
+        "avg_odd": 1.8,
+        "breakeven_rate": 56.1,
+        "units": -0.52
+      }
+    },
     "odds_bands": {
       "under 1.20": {
         "won": 0,
@@ -336,22 +751,22 @@
         "units": 0
       },
       "1.20 to 1.50": {
-        "won": 0,
+        "won": 6,
         "lost": 0,
-        "played": 0,
-        "win_rate": null,
-        "avg_odd": null,
-        "breakeven_rate": null,
-        "units": 0
+        "played": 6,
+        "win_rate": 100,
+        "avg_odd": 1.36,
+        "breakeven_rate": 73.6,
+        "units": 2.18
       },
       "1.51 to 2.00": {
-        "won": 0,
-        "lost": 0,
-        "played": 0,
-        "win_rate": null,
-        "avg_odd": null,
-        "breakeven_rate": null,
-        "units": 0
+        "won": 2,
+        "lost": 2,
+        "played": 4,
+        "win_rate": 50,
+        "avg_odd": 1.8,
+        "breakeven_rate": 56.1,
+        "units": -0.52
       },
       "over 2.00": {
         "won": 0,
