@@ -1,10 +1,10 @@
 {
   "date": "2026-11-23",
-  "generated_at": "2026-11-22T21:22:05.424Z",
+  "generated_at": "2026-11-22T21:30:06.369Z",
   "mode": "TRIAL (free data)",
-  "games_in_leagues": 18,
-  "candidates": 18,
-  "requests_used": 29,
+  "games_in_leagues": 0,
+  "candidates": 0,
+  "requests_used": 1,
   "passed": [
     {
       "id": 1494341,
@@ -453,24 +453,8 @@
       "why": "only 1 of 5 non-odds checks (failed R1, R2, R4, R6)"
     }
   ],
-  "requests_remaining": "89",
-  "league_warnings": [],
-  "leagues_today": [
-    "135 Serie A (Italy)",
-    "39 Premier League (England)",
-    "140 La Liga (Spain)",
-    "128 Liga Profesional Argentina (Argentina)",
-    "262 Liga MX (Mexico)",
-    "253 Major League Soccer (USA)",
-    "203 Süper Lig (Turkey)",
-    "71 Serie A (Brazil)",
-    "333 Premier League (Ukraine)",
-    "197 Super League 1 (Greece)",
-    "113 Allsvenskan (Sweden)",
-    "119 Superliga (Denmark)",
-    "106 Ekstraklasa (Poland)",
-    "141 Segunda División (Spain)"
-  ],
+  "requests_remaining": "99",
+  "error": "{\"access\":\"Your account is suspended, check on https://dashboard.api-football.com.\"}",
   "checked": [
     1550203,
     1557469,
