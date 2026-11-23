@@ -1,10 +1,10 @@
 {
   "date": "2026-11-24",
-  "generated_at": "2026-11-23T21:32:07.397Z",
+  "generated_at": "2026-11-23T21:39:08.326Z",
   "mode": "TRIAL (free data)",
-  "games_in_leagues": 28,
-  "candidates": 28,
-  "requests_used": 44,
+  "games_in_leagues": 0,
+  "candidates": 0,
+  "requests_used": 1,
   "passed": [
     {
       "id": 1635649,
@@ -681,16 +681,9 @@
       "why": "only 0 of 5 non-odds checks (failed R1, R2, R3, R4, R6)"
     }
   ],
-  "requests_remaining": "62",
+  "requests_remaining": "51",
   "league_warnings": [],
-  "leagues_today": [
-    "2 UEFA Champions League (World)",
-    "71 Serie A (Brazil)",
-    "253 Major League Soccer (USA)",
-    "179 Premiership (Scotland)",
-    "40 Championship (England)",
-    "136 Serie B (Italy)"
-  ],
+  "leagues_today": [],
   "checked": [
     1635641,
     1635667,
