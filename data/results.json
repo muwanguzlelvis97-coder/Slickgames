@@ -683,7 +683,8 @@
       "score": 6,
       "tier": "ULTRA_SAFE",
       "on_ticket": true,
-      "status": "pending"
+      "status": "won",
+      "final": "3-1"
     },
     {
       "id": 1651120,
@@ -716,7 +717,8 @@
       "score": 5,
       "tier": "SAFE",
       "on_ticket": true,
-      "status": "pending"
+      "status": "lost",
+      "final": "1-1"
     },
     {
       "id": 1584467,
@@ -732,7 +734,8 @@
       "score": 4,
       "tier": "VALUE",
       "on_ticket": true,
-      "status": "pending"
+      "status": "won",
+      "final": "4-2"
     },
     {
       "id": 1570029,
@@ -780,7 +783,8 @@
       "score": 4,
       "tier": "VALUE",
       "on_ticket": false,
-      "status": "pending"
+      "status": "won",
+      "final": "0-1"
     },
     {
       "id": 1549059,
@@ -796,7 +800,8 @@
       "score": 4,
       "tier": "VALUE",
       "on_ticket": false,
-      "status": "pending"
+      "status": "won",
+      "final": "0-2"
     },
     {
       "id": 1553233,
@@ -812,58 +817,283 @@
       "score": 4,
       "tier": "VALUE",
       "on_ticket": false,
+      "status": "lost",
+      "final": "2-1"
+    },
+    {
+      "id": 1635649,
+      "kickoff": "2026-11-24T20:00:00+00:00",
+      "league": "UEFA Champions League",
+      "league_id": 2,
+      "country": "World",
+      "home": "Como",
+      "away": "AEK Athens FC",
+      "pick": "home",
+      "pick_team": "Como",
+      "odd": 1.26,
+      "score": 6,
+      "tier": "ULTRA_SAFE",
+      "on_ticket": true,
+      "status": "pending"
+    },
+    {
+      "id": 1563282,
+      "kickoff": "2026-11-24T20:00:00+00:00",
+      "league": "Championship",
+      "league_id": 40,
+      "country": "England",
+      "home": "Wolves",
+      "away": "Derby",
+      "pick": "home",
+      "pick_team": "Wolves",
+      "odd": 1.31,
+      "score": 6,
+      "tier": "ULTRA_SAFE",
+      "on_ticket": true,
+      "status": "pending"
+    },
+    {
+      "id": 1647339,
+      "kickoff": "2026-11-24T20:00:00+00:00",
+      "league": "Premiership",
+      "league_id": 179,
+      "country": "Scotland",
+      "home": "Rangers",
+      "away": "Aberdeen",
+      "pick": "home",
+      "pick_team": "Rangers",
+      "odd": 1.23,
+      "score": 5,
+      "tier": "SAFE",
+      "on_ticket": true,
+      "status": "pending"
+    },
+    {
+      "id": 1635731,
+      "kickoff": "2026-11-24T20:00:00+00:00",
+      "league": "UEFA Champions League",
+      "league_id": 2,
+      "country": "World",
+      "home": "Slovan Bratislava",
+      "away": "Real Betis",
+      "pick": "away",
+      "pick_team": "Real Betis",
+      "odd": 1.24,
+      "score": 5,
+      "tier": "SAFE",
+      "on_ticket": true,
+      "status": "pending"
+    },
+    {
+      "id": 1635692,
+      "kickoff": "2026-11-24T20:00:00+00:00",
+      "league": "UEFA Champions League",
+      "league_id": 2,
+      "country": "World",
+      "home": "Manchester City",
+      "away": "Napoli",
+      "pick": "home",
+      "pick_team": "Manchester City",
+      "odd": 1.26,
+      "score": 5,
+      "tier": "SAFE",
+      "on_ticket": true,
+      "status": "pending"
+    },
+    {
+      "id": 1601621,
+      "kickoff": "2026-11-24T19:00:00+00:00",
+      "league": "Serie B",
+      "league_id": 136,
+      "country": "Italy",
+      "home": "Palermo",
+      "away": "Sudtirol",
+      "pick": "home",
+      "pick_team": "Palermo",
+      "odd": 1.43,
+      "score": 5,
+      "tier": "SAFE",
+      "on_ticket": true,
+      "status": "pending"
+    },
+    {
+      "id": 1563278,
+      "kickoff": "2026-11-24T19:45:00+00:00",
+      "league": "Championship",
+      "league_id": 40,
+      "country": "England",
+      "home": "Middlesbrough",
+      "away": "Swansea",
+      "pick": "home",
+      "pick_team": "Middlesbrough",
+      "odd": 1.44,
+      "score": 5,
+      "tier": "SAFE",
+      "on_ticket": false,
+      "status": "pending"
+    },
+    {
+      "id": 1601614,
+      "kickoff": "2026-11-24T19:00:00+00:00",
+      "league": "Serie B",
+      "league_id": 136,
+      "country": "Italy",
+      "home": "Cesena",
+      "away": "Ascoli",
+      "pick": "away",
+      "pick_team": "Ascoli",
+      "odd": 2.52,
+      "score": 5,
+      "tier": "SAFE",
+      "on_ticket": false,
+      "status": "pending"
+    },
+    {
+      "id": 1635715,
+      "kickoff": "2026-11-24T20:00:00+00:00",
+      "league": "UEFA Champions League",
+      "league_id": 2,
+      "country": "World",
+      "home": "Real Madrid",
+      "away": "PSV Eindhoven",
+      "pick": "home",
+      "pick_team": "Real Madrid",
+      "odd": 1.17,
+      "score": 4,
+      "tier": "VALUE",
+      "on_ticket": true,
+      "status": "pending"
+    },
+    {
+      "id": 1635611,
+      "kickoff": "2026-11-24T20:00:00+00:00",
+      "league": "UEFA Champions League",
+      "league_id": 2,
+      "country": "World",
+      "home": "Arsenal",
+      "away": "Borussia Dortmund",
+      "pick": "home",
+      "pick_team": "Arsenal",
+      "odd": 1.39,
+      "score": 4,
+      "tier": "VALUE",
+      "on_ticket": true,
+      "status": "pending"
+    },
+    {
+      "id": 1492472,
+      "kickoff": "2026-11-24T21:00:00+00:00",
+      "league": "Serie A",
+      "league_id": 71,
+      "country": "Brazil",
+      "home": "Chapecoense-sc",
+      "away": "Palmeiras",
+      "pick": "away",
+      "pick_team": "Palmeiras",
+      "odd": 1.79,
+      "score": 4,
+      "tier": "VALUE",
+      "on_ticket": true,
+      "status": "pending"
+    },
+    {
+      "id": 1563279,
+      "kickoff": "2026-11-24T19:45:00+00:00",
+      "league": "Championship",
+      "league_id": 40,
+      "country": "England",
+      "home": "Norwich",
+      "away": "QPR",
+      "pick": "home",
+      "pick_team": "Norwich",
+      "odd": 1.98,
+      "score": 4,
+      "tier": "VALUE",
+      "on_ticket": false,
+      "status": "pending"
+    },
+    {
+      "id": 1649498,
+      "kickoff": "2026-11-24T01:00:00+00:00",
+      "league": "Major League Soccer",
+      "league_id": 253,
+      "country": "USA",
+      "home": "St. Louis City",
+      "away": "Los Angeles FC",
+      "pick": "away",
+      "pick_team": "Los Angeles FC",
+      "odd": 2.5,
+      "score": 4,
+      "tier": "VALUE",
+      "on_ticket": false,
+      "status": "pending"
+    },
+    {
+      "id": 1563281,
+      "kickoff": "2026-11-24T19:45:00+00:00",
+      "league": "Championship",
+      "league_id": 40,
+      "country": "England",
+      "home": "Sheffield Utd",
+      "away": "Southampton",
+      "pick": "away",
+      "pick_team": "Southampton",
+      "odd": 2.58,
+      "score": 4,
+      "tier": "VALUE",
+      "on_ticket": false,
       "status": "pending"
     }
   ],
-  "updated_at": "2026-11-23T05:53:26.811Z",
+  "updated_at": "2026-11-23T21:37:17.570Z",
   "summary": {
     "overall": {
-      "won": 23,
-      "lost": 11,
-      "played": 34,
-      "win_rate": 67.6,
-      "avg_odd": 1.6,
-      "breakeven_rate": 65.3,
-      "units": -0.04
+      "won": 27,
+      "lost": 13,
+      "played": 40,
+      "win_rate": 67.5,
+      "avg_odd": 1.68,
+      "breakeven_rate": 63.2,
+      "units": 1.81
     },
-    "pending": 15,
+    "pending": 23,
     "tiers": {
       "ULTRA_SAFE": {
-        "won": 8,
+        "won": 9,
         "lost": 0,
-        "played": 8,
+        "played": 9,
         "win_rate": 100,
-        "avg_odd": 1.35,
-        "breakeven_rate": 74.4,
-        "units": 2.81
+        "avg_odd": 1.34,
+        "breakeven_rate": 75.3,
+        "units": 3.02
       },
       "SAFE": {
         "won": 10,
-        "lost": 7,
-        "played": 17,
-        "win_rate": 58.8,
-        "avg_odd": 1.61,
-        "breakeven_rate": 64.4,
-        "units": -1.05
+        "lost": 8,
+        "played": 18,
+        "win_rate": 55.6,
+        "avg_odd": 1.64,
+        "breakeven_rate": 63.5,
+        "units": -2.05
       },
       "VALUE": {
-        "won": 5,
-        "lost": 4,
-        "played": 9,
-        "win_rate": 55.6,
-        "avg_odd": 1.81,
-        "breakeven_rate": 59,
-        "units": -1.8
+        "won": 8,
+        "lost": 5,
+        "played": 13,
+        "win_rate": 61.5,
+        "avg_odd": 1.97,
+        "breakeven_rate": 54.4,
+        "units": 0.84
       }
     },
     "tickets": {
       "ULTRA_SAFE": {
-        "won": 2,
+        "won": 3,
         "lost": 0
       },
       "SAFE": {
         "won": 1,
-        "lost": 1
+        "lost": 2
       },
       "VALUE": {
         "won": 1,
@@ -935,22 +1165,22 @@
         "units": 0.48
       },
       "Süper Lig (Turkey)": {
-        "won": 4,
+        "won": 5,
         "lost": 0,
-        "played": 4,
+        "played": 5,
         "win_rate": 100,
-        "avg_odd": 1.8,
-        "breakeven_rate": 60.8,
-        "units": 3.18
+        "avg_odd": 1.81,
+        "breakeven_rate": 59.4,
+        "units": 4.03
       },
       "Premier League (Ukraine)": {
         "won": 1,
-        "lost": 0,
-        "played": 1,
-        "win_rate": 100,
-        "avg_odd": 1.21,
-        "breakeven_rate": 82.6,
-        "units": 0.21
+        "lost": 1,
+        "played": 2,
+        "win_rate": 50,
+        "avg_odd": 1.65,
+        "breakeven_rate": 65.2,
+        "units": -0.79
       },
       "Liga Profesional Argentina (Argentina)": {
         "won": 1,
@@ -987,6 +1217,42 @@
         "avg_odd": 2.74,
         "breakeven_rate": 36.5,
         "units": -1
+      },
+      "Allsvenskan (Sweden)": {
+        "won": 1,
+        "lost": 0,
+        "played": 1,
+        "win_rate": 100,
+        "avg_odd": 1.21,
+        "breakeven_rate": 82.6,
+        "units": 0.21
+      },
+      "Super League 1 (Greece)": {
+        "won": 1,
+        "lost": 0,
+        "played": 1,
+        "win_rate": 100,
+        "avg_odd": 2.22,
+        "breakeven_rate": 45,
+        "units": 1.22
+      },
+      "Superliga (Denmark)": {
+        "won": 1,
+        "lost": 0,
+        "played": 1,
+        "win_rate": 100,
+        "avg_odd": 2.57,
+        "breakeven_rate": 38.9,
+        "units": 1.57
+      },
+      "Ekstraklasa (Poland)": {
+        "won": 0,
+        "lost": 1,
+        "played": 1,
+        "win_rate": 0,
+        "avg_odd": 2.63,
+        "breakeven_rate": 38,
+        "units": -1
       }
     },
     "odds_bands": {
@@ -1000,31 +1266,31 @@
         "units": 0.28
       },
       "1.20 to 1.50": {
-        "won": 14,
+        "won": 15,
         "lost": 3,
-        "played": 17,
-        "win_rate": 82.4,
-        "avg_odd": 1.38,
-        "breakeven_rate": 72.8,
-        "units": 2.03
+        "played": 18,
+        "win_rate": 83.3,
+        "avg_odd": 1.37,
+        "breakeven_rate": 73.4,
+        "units": 2.24
       },
       "1.51 to 2.00": {
-        "won": 6,
+        "won": 7,
         "lost": 5,
-        "played": 11,
-        "win_rate": 54.5,
-        "avg_odd": 1.73,
-        "breakeven_rate": 58.2,
-        "units": -0.91
+        "played": 12,
+        "win_rate": 58.3,
+        "avg_odd": 1.74,
+        "breakeven_rate": 57.9,
+        "units": -0.06
       },
       "over 2.00": {
-        "won": 1,
-        "lost": 3,
-        "played": 4,
-        "win_rate": 25,
-        "avg_odd": 2.43,
-        "breakeven_rate": 41.6,
-        "units": -1.44
+        "won": 3,
+        "lost": 5,
+        "played": 8,
+        "win_rate": 37.5,
+        "avg_odd": 2.4,
+        "breakeven_rate": 42,
+        "units": -0.65
       }
     }
   }
