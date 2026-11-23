@@ -52,6 +52,7 @@ const INTERNATIONAL = {
   10: 'International Friendlies'
 };
 const FRIENDLY_ID = 10;
+const SKIP_H2H = new Set([2, 3, 848]); // Champions, Europa, Conference League: no head-to-head check
 
 // Youth (U15-U23) and women's teams are not allowed
 const isYouthName = (n) =>
@@ -174,7 +175,7 @@ try {
       const r = {
         1: form >= 60,        // R1 form (approx.)
         2: strength >= 60,    // R2 overall strength vs opponent (approx.)
-        3: wins >= 2,         // R3 won 2 of last 3 head-to-head
+        3: SKIP_H2H.has(f.league.id) || wins >= 2,   // R3 head-to-head (skipped for European cups)
         4: att >= 55,         // R4 attack rating (approx.)
         5: false,             // R5 odds 1.20-1.50
         6: avgFor >= 1.6      // R6 about 8+ goals in last 5 (approx.)
