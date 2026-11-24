@@ -751,7 +751,8 @@
       "score": 4,
       "tier": "VALUE",
       "on_ticket": true,
-      "status": "pending"
+      "status": "won",
+      "final": "2-3"
     },
     {
       "id": 1649567,
@@ -767,7 +768,8 @@
       "score": 4,
       "tier": "VALUE",
       "on_ticket": true,
-      "status": "pending"
+      "status": "lost",
+      "final": "2-2"
     },
     {
       "id": 1593359,
@@ -914,7 +916,8 @@
       "score": 5,
       "tier": "SAFE",
       "on_ticket": true,
-      "status": "pending"
+      "status": "won",
+      "final": "4-1"
     },
     {
       "id": 1563278,
@@ -946,7 +949,8 @@
       "score": 5,
       "tier": "SAFE",
       "on_ticket": false,
-      "status": "pending"
+      "status": "lost",
+      "final": "5-1"
     },
     {
       "id": 1635715,
@@ -1026,7 +1030,8 @@
       "score": 4,
       "tier": "VALUE",
       "on_ticket": false,
-      "status": "pending"
+      "status": "lost",
+      "final": "3-2"
     },
     {
       "id": 1563281,
@@ -1043,20 +1048,164 @@
       "tier": "VALUE",
       "on_ticket": false,
       "status": "pending"
+    },
+    {
+      "id": 1635703,
+      "kickoff": "2026-11-25T20:00:00+00:00",
+      "league": "UEFA Champions League",
+      "league_id": 2,
+      "country": "World",
+      "home": "Paris Saint Germain",
+      "away": "AS Roma",
+      "pick": "home",
+      "pick_team": "Paris Saint Germain",
+      "odd": 1.44,
+      "score": 6,
+      "tier": "ULTRA_SAFE",
+      "on_ticket": true,
+      "status": "pending"
+    },
+    {
+      "id": 1556154,
+      "kickoff": "2026-11-25T10:00:00+00:00",
+      "league": "J1 League",
+      "league_id": 98,
+      "country": "Japan",
+      "home": "Mito Hollyhock",
+      "away": "Tokyo Verdy",
+      "pick": "away",
+      "pick_team": "Tokyo Verdy",
+      "odd": 2.5,
+      "score": 5,
+      "tier": "SAFE",
+      "on_ticket": true,
+      "status": "pending"
+    },
+    {
+      "id": 1601622,
+      "kickoff": "2026-11-25T19:00:00+00:00",
+      "league": "Serie B",
+      "league_id": 136,
+      "country": "Italy",
+      "home": "Pisa",
+      "away": "Modena",
+      "pick": "away",
+      "pick_team": "Modena",
+      "odd": 3,
+      "score": 5,
+      "tier": "SAFE",
+      "on_ticket": true,
+      "status": "pending"
+    },
+    {
+      "id": 1556152,
+      "kickoff": "2026-11-25T10:00:00+00:00",
+      "league": "J1 League",
+      "league_id": 98,
+      "country": "Japan",
+      "home": "JEF United Chiba",
+      "away": "Nagoya Grampus",
+      "pick": "home",
+      "pick_team": "JEF United Chiba",
+      "odd": 3.15,
+      "score": 5,
+      "tier": "SAFE",
+      "on_ticket": true,
+      "status": "pending"
+    },
+    {
+      "id": 1635682,
+      "kickoff": "2026-11-25T20:00:00+00:00",
+      "league": "UEFA Champions League",
+      "league_id": 2,
+      "country": "World",
+      "home": "Lille",
+      "away": "Bayern München",
+      "pick": "away",
+      "pick_team": "Bayern München",
+      "odd": 1.65,
+      "score": 4,
+      "tier": "VALUE",
+      "on_ticket": true,
+      "status": "pending"
+    },
+    {
+      "id": 1556157,
+      "kickoff": "2026-11-25T10:00:00+00:00",
+      "league": "J1 League",
+      "league_id": 98,
+      "country": "Japan",
+      "home": "V-varen Nagasaki",
+      "away": "Kawasaki Frontale",
+      "pick": "away",
+      "pick_team": "Kawasaki Frontale",
+      "odd": 1.86,
+      "score": 4,
+      "tier": "VALUE",
+      "on_ticket": true,
+      "status": "pending"
+    },
+    {
+      "id": 1601615,
+      "kickoff": "2026-11-25T18:00:00+00:00",
+      "league": "Serie B",
+      "league_id": 136,
+      "country": "Italy",
+      "home": "Cremonese",
+      "away": "Avellino",
+      "pick": "home",
+      "pick_team": "Cremonese",
+      "odd": 1.98,
+      "score": 4,
+      "tier": "VALUE",
+      "on_ticket": true,
+      "status": "pending"
+    },
+    {
+      "id": 1635735,
+      "kickoff": "2026-11-25T20:00:00+00:00",
+      "league": "UEFA Champions League",
+      "league_id": 2,
+      "country": "World",
+      "home": "Sporting CP",
+      "away": "Manchester United",
+      "pick": "home",
+      "pick_team": "Sporting CP",
+      "odd": 2.47,
+      "score": 4,
+      "tier": "VALUE",
+      "on_ticket": false,
+      "status": "pending"
+    },
+    {
+      "id": 1492461,
+      "kickoff": "2026-11-25T23:00:00+00:00",
+      "league": "Serie A",
+      "league_id": 71,
+      "country": "Brazil",
+      "home": "Atletico-MG",
+      "away": "Corinthians",
+      "pick": "away",
+      "pick_team": "Corinthians",
+      "odd": 2.93,
+      "score": 4,
+      "tier": "VALUE",
+      "on_ticket": false,
+      "status": "pending"
     }
   ],
-  "updated_at": "2026-11-23T21:39:22.008Z",
+  "updated_at": "2026-11-24T21:49:25.628Z",
   "summary": {
     "overall": {
-      "won": 27,
-      "lost": 13,
-      "played": 40,
-      "win_rate": 67.5,
-      "avg_odd": 1.68,
-      "breakeven_rate": 63.2,
-      "units": 1.81
+      "won": 29,
+      "lost": 16,
+      "played": 45,
+      "win_rate": 64.4,
+      "avg_odd": 1.72,
+      "breakeven_rate": 61.7,
+      "units": 0.17
     },
-    "pending": 23,
+    "pending": 27,
     "tiers": {
       "ULTRA_SAFE": {
         "won": 9,
@@ -1068,22 +1217,22 @@
         "units": 3.02
       },
       "SAFE": {
-        "won": 10,
-        "lost": 8,
-        "played": 18,
-        "win_rate": 55.6,
-        "avg_odd": 1.64,
-        "breakeven_rate": 63.5,
-        "units": -2.05
+        "won": 11,
+        "lost": 9,
+        "played": 20,
+        "win_rate": 55,
+        "avg_odd": 1.67,
+        "breakeven_rate": 62.6,
+        "units": -2.62
       },
       "VALUE": {
-        "won": 8,
-        "lost": 5,
-        "played": 13,
-        "win_rate": 61.5,
-        "avg_odd": 1.97,
-        "breakeven_rate": 54.4,
-        "units": 0.84
+        "won": 9,
+        "lost": 7,
+        "played": 16,
+        "win_rate": 56.3,
+        "avg_odd": 2.01,
+        "breakeven_rate": 52.9,
+        "units": -0.23
       }
     },
     "tickets": {
@@ -1097,7 +1246,7 @@
       },
       "VALUE": {
         "won": 1,
-        "lost": 1
+        "lost": 2
       }
     },
     "by_league": {
@@ -1184,21 +1333,21 @@
       },
       "Liga Profesional Argentina (Argentina)": {
         "won": 1,
-        "lost": 0,
-        "played": 1,
-        "win_rate": 100,
-        "avg_odd": 1.37,
-        "breakeven_rate": 73,
-        "units": 0.37
-      },
-      "Major League Soccer (USA)": {
-        "won": 1,
         "lost": 1,
         "played": 2,
         "win_rate": 50,
-        "avg_odd": 1.46,
-        "breakeven_rate": 68.5,
-        "units": -0.56
+        "avg_odd": 1.74,
+        "breakeven_rate": 60.2,
+        "units": -0.63
+      },
+      "Major League Soccer (USA)": {
+        "won": 1,
+        "lost": 2,
+        "played": 3,
+        "win_rate": 33.3,
+        "avg_odd": 1.81,
+        "breakeven_rate": 59,
+        "units": -1.56
       },
       "Eredivisie (Netherlands)": {
         "won": 1,
@@ -1227,6 +1376,15 @@
         "breakeven_rate": 82.6,
         "units": 0.21
       },
+      "Segunda División (Spain)": {
+        "won": 1,
+        "lost": 0,
+        "played": 1,
+        "win_rate": 100,
+        "avg_odd": 1.93,
+        "breakeven_rate": 51.8,
+        "units": 0.93
+      },
       "Super League 1 (Greece)": {
         "won": 1,
         "lost": 0,
@@ -1253,6 +1411,15 @@
         "avg_odd": 2.63,
         "breakeven_rate": 38,
         "units": -1
+      },
+      "Serie B (Italy)": {
+        "won": 1,
+        "lost": 1,
+        "played": 2,
+        "win_rate": 50,
+        "avg_odd": 1.98,
+        "breakeven_rate": 54.8,
+        "units": -0.57
       }
     },
     "odds_bands": {
@@ -1266,31 +1433,31 @@
         "units": 0.28
       },
       "1.20 to 1.50": {
-        "won": 15,
+        "won": 16,
         "lost": 3,
-        "played": 18,
-        "win_rate": 83.3,
+        "played": 19,
+        "win_rate": 84.2,
         "avg_odd": 1.37,
-        "breakeven_rate": 73.4,
-        "units": 2.24
+        "breakeven_rate": 73.2,
+        "units": 2.67
       },
       "1.51 to 2.00": {
-        "won": 7,
+        "won": 8,
         "lost": 5,
-        "played": 12,
-        "win_rate": 58.3,
-        "avg_odd": 1.74,
-        "breakeven_rate": 57.9,
-        "units": -0.06
+        "played": 13,
+        "win_rate": 61.5,
+        "avg_odd": 1.76,
+        "breakeven_rate": 57.4,
+        "units": 0.87
       },
       "over 2.00": {
         "won": 3,
-        "lost": 5,
-        "played": 8,
-        "win_rate": 37.5,
+        "lost": 8,
+        "played": 11,
+        "win_rate": 27.3,
         "avg_odd": 2.4,
-        "breakeven_rate": 42,
-        "units": -0.65
+        "breakeven_rate": 42.1,
+        "units": -3.65
       }
     }
   }
